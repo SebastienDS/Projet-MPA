@@ -8,6 +8,12 @@ html, body, .max-height {
     height: 100%;
 }
 
+body {
+    background-image: url("../img/fond_ecran.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -31,10 +37,4 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-body {
-    background-image: url("../img/fond_ecran.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
 }

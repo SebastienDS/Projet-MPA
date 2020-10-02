@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
 
-    <link rel="stylesheet" href="css/accueil.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?= SCRIPTS ?>/css/accueil.css">
+    <link rel="stylesheet" href="<?= SCRIPTS ?>/css/style.css">
 </head>
 <body>
     

@@ -2,13 +2,26 @@
 
 namespace App\Controllers;
 
-class AccueilController {
+class AccueilController extends Controller {
 
-    public function accueil() {
-        echo "je suis l'accueil";
+    public function index() {
+        return $this->view('accueil', [
+            'title' => 'Accueil',
+            'style' => [
+                'accueil',
+                'style',
+            ]
+        ]);
     }
 
     public function test(int $id) {
-        echo "je test l'id $id";
+        return $this->view('test', [
+            'title' => 'Test',
+            'id' => $id,
+            'style' => [
+                'accueil',
+                'style',
+            ]
+        ]);
     }
 }
