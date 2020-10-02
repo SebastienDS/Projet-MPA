@@ -1,0 +1,16 @@
+{
+    "name": "natso/projet-mpa",
+    "authors": [
+        {
+            "name": "SebastienDS",
+            "email": "sebastien.dossantos.77@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Router\\": "app/routes/",
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}
