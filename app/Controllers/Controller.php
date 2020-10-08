@@ -11,9 +11,9 @@ class Controller {
         extract($params);
 
         ob_start();
-        require VIEWS . "/$path.php";
+        require "views/$path.php";
         $content = ob_get_clean();
 
-        return require VIEWS . "/layout.php";
+        return require "views/layout.php";
     }
 }

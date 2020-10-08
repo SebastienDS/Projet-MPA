@@ -6,7 +6,7 @@
     <title><?= $title ?></title>
 
     <?php foreach ($style as $css): ?>
-        <link rel="stylesheet" href="<?= SCRIPTS ?>/css/<?= $css ?>.css">
+        <link rel="stylesheet" href="<?= SCRIPT_NAME ?>/../public/css/<?= $css ?>.css">
     <?php endforeach; ?>
 </head>
 <body>
