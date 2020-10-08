@@ -17,3 +17,12 @@
     text-align: center;
     font-size: 30px;
 }
+
+.submit-btn {
+    width: 200px;
+    height: 50px;
+    background-color: #ffd966ff;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 1.5em;
+}

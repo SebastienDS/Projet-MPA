@@ -16,4 +16,19 @@ class ConnexionController extends Controller {
             ]
         ]);
     }
+
+    public function connected() {
+        return $this->view('connected', [
+            'title' => 'Connecté',
+            'username' => $_POST['username'],
+            'password' => $_POST['password']
+        ]);
+    }
+
+    public function validConnexion() {
+        if ($_POST['username'] === 'test' && $_POST['password'] === 'test') {
+            return $this->connected();
+        }
+        return $this->connexion();
+    }
 }

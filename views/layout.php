@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
 
-    <?php foreach ($style as $css): ?>
+    <?php foreach ($style ?? [] as $css): ?>
         <link rel="stylesheet" href="<?= SCRIPT_NAME ?>/../public/css/<?= $css ?>.css">
     <?php endforeach; ?>
 </head>
