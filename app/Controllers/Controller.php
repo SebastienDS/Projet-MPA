@@ -14,6 +14,6 @@ class Controller {
         require "views/$path.php";
         $content = ob_get_clean();
 
-        return require "views/layout.php";
+        return require "views/layout/layout.php";
     }
 }

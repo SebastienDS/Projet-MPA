@@ -1,9 +1,9 @@
 <div class="header">
     <a>
-        <img src="<?= SCRIPT_NAME ?>/../public/img/logo.png" width="200" height="200">
+        <img src="<?= SCRIPT_NAME ?>/public/img/logo.png" width="200" height="200">
     </a>
 
-    <img src="<?= SCRIPT_NAME ?>/../public/img/nom_marque.png">
+    <img src="<?= SCRIPT_NAME ?>/public/img/nom_marque.png">
 
     <div class="login space-around column">
         <a href="#" class="btn">Mon Espace</a>

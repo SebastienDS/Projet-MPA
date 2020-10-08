@@ -18,7 +18,7 @@ class ConnexionController extends Controller {
     }
 
     public function connected() {
-        return $this->view('connected', [
+        return $this->view('connected/showInfo', [
             'title' => 'Connecté',
             'username' => $_POST['username'],
             'password' => $_POST['password']
