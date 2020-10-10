@@ -1,5 +1,5 @@
 <div class="header">
-    <a href='#'>
+    <a href='/bank.php/client'>
         <img src="<?= SCRIPT_NAME ?>/public/img/logo.png" width="200" height="200">
     </a>
 
@@ -15,12 +15,12 @@
     <div>
         <ul id="menu-deroulant">
             <li>
-                <a href='#'>
+                <a href='/bank.php/client/showInfo'>
                     <img src="<?= SCRIPT_NAME ?>/public/img/logo.png" width="200" height="200">
                 </a>
                 <ul>
-                    <li><a href="#">Changer de Mot de Passe</a></li>
-                    <li><a href="#">Se déconnecter</a></li>
+                    <li><a href="/bank.php/client/changePassword">Changer de Mot de Passe</a></li>
+                    <li><a href="/bank.php/client/logout">Se déconnecter</a></li>
                 </ul>
             </li>
         </ul>

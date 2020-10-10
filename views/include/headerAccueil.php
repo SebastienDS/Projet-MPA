@@ -6,7 +6,7 @@
     <img src="<?= SCRIPT_NAME ?>/public/img/nom_marque.png">
 
     <div class="login space-around column">
-        <a href="#" class="btn">Mon Espace</a>
+        <a href="/bank.php/connexion" class="btn">Mon Espace</a>
         <a href="#" class="btn">Devenir Client</a>
     </div>
 </div>

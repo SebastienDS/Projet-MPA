@@ -1,7 +1,7 @@
 <?php require_once('include/headerAccueil.php') ?>
 
 <div class="form-connexion-container center">
-    <form class="connexion-form space-around column" method='POST'>
+    <form class="connexion-form space-around column" method='POST' action='connexionValidation'>
         <div class="center">
             <input type="text" placeholder="Username" class="form-btn" name="username">
         </div>

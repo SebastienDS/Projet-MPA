@@ -15,12 +15,20 @@ $url = substr($fullUrl, strlen($prefix));
 $router = new Router($url);
 
 $router->get('/', 'App\Controllers\AccueilController@index');
-$router->get('/client', 'App\Controllers\AccueilController@client');
+
+$router->get('/client', 'App\Controllers\ClientController@accueil');
+$router->get('/client/showInfo', 'App\Controllers\ClientController@showInfo');
+$router->get('/client/changePassword', 'App\Controllers\ClientController@changePassword');
+$router->post('/client/passwordValidation', 'App\Controllers\ClientController@passwordValidation');
+$router->get('/client/logout', 'App\Controllers\ClientController@logout');
+
+
 $router->get('/connexion', 'App\Controllers\ConnexionController@connexion');
+$router->post('/connexionValidation', 'App\Controllers\ClientController@validConnexion');
+
 $router->get('/test/:id', 'App\Controllers\AccueilController@test');
 
 
-$router->post('/connexion', 'App\Controllers\ConnexionController@validConnexion');
 
 
 $router->run();
