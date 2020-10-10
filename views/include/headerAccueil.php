@@ -1,5 +1,5 @@
 <div class="header">
-    <a>
+    <a href="/bank.php">
         <img src="<?= SCRIPT_NAME ?>/public/img/logo.png" width="200" height="200">
     </a>
 
