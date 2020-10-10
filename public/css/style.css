@@ -38,3 +38,8 @@ a {
     justify-content: center;
     align-items: center;
 }
+
+.grow {
+    display: flex;
+    flex-grow: 100;
+}
