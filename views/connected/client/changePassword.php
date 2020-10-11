@@ -1,7 +1,7 @@
 <?php require_once('views/include/headerClient.php'); ?>
 
 <div class="form-connexion-container center">
-    <form class="connexion-form space-around column" method='POST' action='passwordValidation'>
+    <form class="connexion-form space-around column" method='POST' action="<?= SCRIPT_NAME ?>/bank.php/client/password/validation">
         <div class="center">
             <input type="password" placeholder="Ancien Mot de Passe" class="form-btn" name="lastPassword">
         </div>
