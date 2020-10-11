@@ -1,3 +1,7 @@
+<pre>
+<?php var_dump($_SERVER); die(); ?>
+</pre>
+
 <?php
 
 use Router\Router;
