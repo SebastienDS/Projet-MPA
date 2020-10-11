@@ -22,13 +22,10 @@ $router->get('/client/changePassword', 'App\Controllers\ClientController@changeP
 $router->post('/client/passwordValidation', 'App\Controllers\ClientController@passwordValidation');
 $router->get('/client/logout', 'App\Controllers\ClientController@logout');
 
-
 $router->get('/connexion', 'App\Controllers\ConnexionController@connexion');
 $router->post('/connexionValidation', 'App\Controllers\ClientController@validConnexion');
 
 $router->get('/test/:id', 'App\Controllers\AccueilController@test');
-
-
 
 
 $router->run();
