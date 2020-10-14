@@ -24,7 +24,7 @@ class ComposerStaticInitd5a0dfede9d2c7dc185c219d0eb18511
     public static $prefixDirsPsr4 = array (
         'Router\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/routes',
+            0 => __DIR__ . '/../..' . '/routes',
         ),
         'Database\\' => 
         array (

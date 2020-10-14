@@ -8,10 +8,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Router\\": "app/routes/",
+            "Router\\": "routes/",
             "App\\": "app/",
             "Database\\": "database/"
         }
     },
-    "require": {}
+    "require": {
+        "ext-pdo": "*"
+    }
 }

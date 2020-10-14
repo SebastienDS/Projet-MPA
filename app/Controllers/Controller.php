@@ -5,7 +5,7 @@ namespace App\Controllers;
 
 use Database\DBConnection;
 
-class Controller {
+abstract class Controller {
 
     private $db;
 
