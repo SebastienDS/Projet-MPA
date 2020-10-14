@@ -4,7 +4,9 @@ use Router\Router;
 
 require 'vendor/autoload.php';
 
+require 'database/dbParams.php';
 define('SCRIPT_NAME', str_replace('/bank.php', '', $_SERVER['SCRIPT_NAME']));
+
 
 $fullUrl = $_SERVER['PHP_SELF'];
 $prefix = $_SERVER['SCRIPT_NAME'];

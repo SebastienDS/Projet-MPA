@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 
 class ClientController extends Controller {
+
     public function accueil() {
         return $this->view('connected/client/accueil', [
             'title' => 'Accueil',
