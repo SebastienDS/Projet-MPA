@@ -3,7 +3,6 @@
 
 namespace App\Controllers;
 
-
 use Database\DBConnection;
 
 class Controller {
@@ -11,6 +10,9 @@ class Controller {
     private $db;
 
     public function __construct(DBConnection $db) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         $this->db = $db;
     }
 
@@ -26,5 +28,11 @@ class Controller {
         $content = ob_get_clean();
 
         return require "views/layout/layout.php";
+    }
+
+    public function isConnected(string $auth) {
+        if (!isset($_SESSION['auth']) || $_SESSION['auth'] != $auth) {
+            return header('Location: '. SCRIPT_NAME . '/bank.php/connexion');
+        }
     }
 }
