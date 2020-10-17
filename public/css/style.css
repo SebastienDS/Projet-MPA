@@ -47,3 +47,8 @@ a {
 .bg-white {
     background-color: #fff;
 }
+
+.success {
+    height: 3rem;
+    background-color: lawngreen;
+}
