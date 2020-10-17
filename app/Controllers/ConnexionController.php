@@ -3,6 +3,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Client;
+use App\Models\Admin;
 
 class ConnexionController extends Controller {
 
@@ -18,11 +20,17 @@ class ConnexionController extends Controller {
     }
 
     public function validConnexion() {
-        if ($_POST['username'] === 'test' && $_POST['password'] === 'test') {
-            $_SESSION['username'] = $_POST['username'];
+        $username = htmlentities($_POST['username']);
+        $password = htmlentities($_POST['password']);
+        $_SESSION['username'] = $username;
+
+        if ((new Client())->isConnected($username, $password)) {
             $_SESSION['auth'] = 'client';
             return header('Location: '. SCRIPT_NAME .'/bank.php/client');
-
+        }
+        if ((new Admin())->isConnected($username, $password)) {
+            $_SESSION['auth'] = 'admin';
+            return header('Location: '. SCRIPT_NAME .'/bank.php/admin');
         }
         return header('Location: '. SCRIPT_NAME .'/bank.php/connexion');
     }

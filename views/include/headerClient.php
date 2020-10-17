@@ -20,7 +20,7 @@
                 </a>
                 <ul>
                     <li><a href="<?= SCRIPT_NAME ?>/bank.php/client/changePassword">Changer de Mot de Passe</a></li>
-                    <li><a href="<?= SCRIPT_NAME ?>/bank.php/client/logout">Se déconnecter</a></li>
+                    <li><a href="<?= SCRIPT_NAME ?>/bank.php/logout">Se déconnecter</a></li>
                 </ul>
             </li>
         </ul>

@@ -17,14 +17,17 @@ $router = new Router($url);
 
 $router->get('/', 'App\Controllers\AccueilController@index');
 
+$router->get('/connexion', 'App\Controllers\ConnexionController@connexion');
+$router->post('/connexion/validation', 'App\Controllers\ConnexionController@validConnexion');
+$router->get('/logout', 'App\Controllers\ConnexionController@logout');
+
 $router->get('/client', 'App\Controllers\ClientController@accueil');
 $router->get('/client/showInfo', 'App\Controllers\ClientController@showInfo');
 $router->get('/client/changePassword', 'App\Controllers\ConnexionController@changePassword');
 $router->post('/client/password/validation', 'App\Controllers\ConnexionController@passwordValidation');
-$router->get('/client/logout', 'App\Controllers\ConnexionController@logout');
 
-$router->get('/connexion', 'App\Controllers\ConnexionController@connexion');
-$router->post('/connexion/validation', 'App\Controllers\ConnexionController@validConnexion');
+$router->get('/admin', 'App\Controllers\AdminController@accueil');
+
 
 $router->get('/test/:id', 'App\Controllers\AccueilController@test');
 

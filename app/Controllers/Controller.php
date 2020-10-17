@@ -7,17 +7,10 @@ use Database\DBConnection;
 
 abstract class Controller {
 
-    private $db;
-
-    public function __construct(DBConnection $db) {
+    public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        $this->db = $db;
-    }
-
-    public function getDB(): DBConnection {
-        return $this->db;
     }
 
     public function view(string $path, array $params = []) {
