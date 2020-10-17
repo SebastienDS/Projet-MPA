@@ -8,7 +8,7 @@ use Database\DBConnection;
 
 class Profil extends Model {
 
-    protected static $table = 'profilmpa';
+    protected static $table = 'Profilmpa';
 
     public static function getTable(): string {
         return self::$table;

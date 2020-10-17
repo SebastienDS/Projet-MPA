@@ -8,7 +8,7 @@ use Database\DBConnection;
 
 class Client extends Model {
 
-    protected static $table = 'client';
+    protected static $table = 'Client';
 
     public static function getTable(): string {
         return self::$table;

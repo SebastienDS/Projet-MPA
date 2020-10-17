@@ -8,7 +8,7 @@ use Database\DBConnection;
 
 class Admin extends Model {
 
-    protected static $table = 'admin';
+    protected static $table = 'Admin';
 
     public static function getTable(): string {
         return self::$table;
