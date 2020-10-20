@@ -44,7 +44,7 @@ class ConnexionController extends Controller {
 
         $error = (int)htmlentities($_GET['error'] ?? 0);
 
-        return $this->view('connected/client/changePassword', [
+        return $this->view('client/changePassword', [
             'title' => 'Changer Mot de passe',
             'style' => [
                 'accueil',

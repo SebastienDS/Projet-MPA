@@ -110,13 +110,13 @@
 
     <div class="DL-btns space-around">
         <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/pdf/compte/<?= $numeroCompte ?>" method="POST">
-            <button class="DL-btn">PDF</button>
+            <button class="btn">PDF</button>
         </form>
         <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/xls/compte/<?= $numeroCompte ?>" method="POST">
-            <button class="DL-btn">XLS</button>
+            <button class="btn">XLS</button>
         </form>
         <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/csv/compte/<?= $numeroCompte ?>" method="POST">
-            <button class="DL-btn">CSV</button>
+            <button class="btn">CSV</button>
         </form>
     </div>
 </div>
