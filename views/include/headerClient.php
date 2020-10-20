@@ -4,12 +4,12 @@
     </a>
 
     <div class="max-height grow">
-        <div class="headerBtn center">
+        <a href="<?= SCRIPT_NAME ?>/bank.php/client/mesComptes" class="headerBtn center-x center-y">
             Mes Comptes
-        </div>
-        <div class="headerBtn center">
+        </a>
+        <a href="" class="headerBtn center-x center-y">
             Mes Impayés
-        </div>
+        </a>
     </div>
 
     <div>
