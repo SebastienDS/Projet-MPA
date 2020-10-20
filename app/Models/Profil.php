@@ -14,7 +14,7 @@ class Profil extends Model {
         return self::$table;
     }
 
-    public function updatePassword(string $username, string $lastPassword, string $newPassword) {
+    public static function updatePassword(string $username, string $lastPassword, string $newPassword) {
         $tableName = self::$table;
         $stmt = DBConnection::getPDO()->prepare("UPDATE {$tableName} SET pwd = ? WHERE pseudo = ? AND pwd = ?");
         $stmt->execute([sha1($newPassword), $username, sha1($lastPassword)]);

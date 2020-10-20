@@ -13,15 +13,4 @@ class AccueilController extends Controller {
             ]
         ]);
     }
-
-    public function test(int $id) {
-        return $this->view('test', [
-            'title' => 'Test',
-            'id' => $id,
-            'style' => [
-                'accueil',
-                'style',
-            ]
-        ]);
-    }
 }

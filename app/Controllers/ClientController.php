@@ -9,7 +9,7 @@ class ClientController extends Controller {
         $this->isConnected('client');
         $success = (int)htmlentities($_GET['success'] ?? 0);
 
-        return $this->view('connected/client/accueil', [
+        return $this->view('client/accueil', [
             'title' => 'Accueil',
             'style' => [
                 'accueil',
@@ -22,12 +22,25 @@ class ClientController extends Controller {
     public function showInfo() {
         $this->isConnected('client');
         
-        return $this->view('connected/client/showInfo', [
+        return $this->view('client/showInfo', [
             'title' => 'Connecté',
             'username' => $_SESSION['username'],
             'style' => [
                 'accueil',
                 'style',
+            ]
+        ]);
+    }
+
+    public function mesComptes() {
+        $this->isConnected('client');
+
+        return $this->view('client/mesComptes', [
+            'title' => 'Mes Comptes',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes'
             ]
         ]);
     }

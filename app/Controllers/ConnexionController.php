@@ -28,11 +28,11 @@ class ConnexionController extends Controller {
         $password = htmlentities($_POST['password']);
         $_SESSION['username'] = $username;
 
-        if ((new Client())->isConnected($username, $password)) {
+        if (Client::isConnected($username, $password)) {
             $_SESSION['auth'] = 'client';
             return header('Location: '. SCRIPT_NAME .'/bank.php/client?success=1');
         }
-        if ((new Admin())->isConnected($username, $password)) {
+        if (Admin::isConnected($username, $password)) {
             $_SESSION['auth'] = 'admin';
             return header('Location: '. SCRIPT_NAME .'/bank.php/admin?success=1');
         }
@@ -69,7 +69,7 @@ class ConnexionController extends Controller {
             return header('Location: '. SCRIPT_NAME .'/bank.php/client/changePassword?error=2');
         }
 
-        $updatedRows = (new Profil())->updatePassword($_SESSION['username'], $lastPassword, $newPassword);
+        $updatedRows = Profil::updatePassword($_SESSION['username'], $lastPassword, $newPassword);
         if (!$updatedRows) {
             return header('Location: '. SCRIPT_NAME .'/bank.php/client/changePassword?error=3');
         }

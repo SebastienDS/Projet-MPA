@@ -33,9 +33,18 @@ a {
     flex-direction: column;
 }
 
-.center {
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.center-x {
     display: flex;
     justify-content: center;
+}
+
+.center-y {
+    display: flex;
     align-items: center;
 }
 

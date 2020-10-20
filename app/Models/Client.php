@@ -14,7 +14,7 @@ class Client extends Model {
         return self::$table;
     }
 
-    public function isConnected(string $username, string $password) {
+    public static function isConnected(string $username, string $password) {
         $tableName = self::$table;
         $tableJoin = Profil::getTable();
         $stmt = DBConnection::getPDO()->prepare("SELECT count(id)
