@@ -1,7 +1,7 @@
 <?php require_once('views/include/headerClient.php'); ?>
 
 <div class="form-connexion-container center-x center-y">
-    <form class="connexion-form space-around column" method='POST' action="<?= SCRIPT_NAME ?>/bank.php/client/password/validation">
+    <form class="connexion-form space-around column" method='POST' action="<?= SCRIPT_NAME ?>/bank.php/password/validation">
         <?php if ($error):?>
             <div class="center-x center-y">
                 <?php if ($error === 1): ?>

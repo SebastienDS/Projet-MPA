@@ -1,16 +1,7 @@
 <div class="header">
-    <a href="<?= SCRIPT_NAME ?>/bank.php/client">
+    <a href="<?= SCRIPT_NAME ?>/bank.php/admin">
         <img src="<?= SCRIPT_NAME ?>/public/img/logo.png" width="200" height="200">
     </a>
-
-    <div class="max-height grow">
-        <a href="<?= SCRIPT_NAME ?>/bank.php/client/mesComptes" class="headerBtn center-x center-y">
-            Mes Comptes
-        </a>
-        <a href="<?= SCRIPT_NAME ?>/bank.php/client/mesImpayes" class="headerBtn center-x center-y">
-            Mes Impayés
-        </a>
-    </div>
 
     <div>
         <ul id="menu-deroulant">

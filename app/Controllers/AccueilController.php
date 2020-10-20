@@ -13,4 +13,17 @@ class AccueilController extends Controller {
             ]
         ]);
     }
+
+    public function showInfo() {
+        $this->isConnected(['client', 'admin']);
+
+        return $this->view('showInfo', [
+            'title' => 'Connecté',
+            'username' => $_SESSION['username'],
+            'style' => [
+                'accueil',
+                'style',
+            ]
+        ]);
+    }
 }

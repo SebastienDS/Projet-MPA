@@ -40,11 +40,11 @@ class ConnexionController extends Controller {
     }
 
     public function changePassword() {
-        $this->isConnected('client');
+        $this->isConnected(['client', 'admin']);
 
         $error = (int)htmlentities($_GET['error'] ?? 0);
 
-        return $this->view('client/changePassword', [
+        return $this->view('changePassword', [
             'title' => 'Changer Mot de passe',
             'style' => [
                 'accueil',
@@ -56,24 +56,24 @@ class ConnexionController extends Controller {
     }
 
     public function passwordValidation() {
-        $this->isConnected('client');
+        $this->isConnected(['client', 'admin']);
 
         $newPassword = htmlentities($_POST['newPassword']);
         $newPasswordConfirm = htmlentities($_POST['newPasswordConfirm']);
         $lastPassword = htmlentities($_POST['lastPassword']);
 
         if ($newPassword !== $newPasswordConfirm) {
-            return header('Location: '. SCRIPT_NAME .'/bank.php/client/changePassword?error=1');
+            return header('Location: '. SCRIPT_NAME .'/bank.php/changePassword?error=1');
         }
         if ($newPassword === $lastPassword) {
-            return header('Location: '. SCRIPT_NAME .'/bank.php/client/changePassword?error=2');
+            return header('Location: '. SCRIPT_NAME .'/bank.php/changePassword?error=2');
         }
 
         $updatedRows = Profil::updatePassword($_SESSION['username'], $lastPassword, $newPassword);
         if (!$updatedRows) {
-            return header('Location: '. SCRIPT_NAME .'/bank.php/client/changePassword?error=3');
+            return header('Location: '. SCRIPT_NAME .'/bank.php/changePassword?error=3');
         }
-        return header('Location: '. SCRIPT_NAME .'/bank.php/client?success=2');
+        return header('Location: '. SCRIPT_NAME .'/bank.php/'. $_SESSION['auth'] .'?success=2');
     }
 
     public function logout() {

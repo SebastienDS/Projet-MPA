@@ -23,8 +23,8 @@ abstract class Controller {
         return require "views/layout/layout.php";
     }
 
-    public function isConnected(string $auth) {
-        if (!isset($_SESSION['auth']) || $_SESSION['auth'] != $auth) {
+    public function isConnected(array $auth) {
+        if (!isset($_SESSION['auth']) || !in_Array($_SESSION['auth'], $auth)) {
             return header('Location: '. SCRIPT_NAME . '/bank.php/connexion');
         }
     }

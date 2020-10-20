@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 class ClientController extends Controller {
     public function accueil() {
-        $this->isConnected('client');
+        $this->isConnected(['client']);
         $success = (int)htmlentities($_GET['success'] ?? 0);
 
         return $this->view('client/accueil', [
@@ -19,21 +19,8 @@ class ClientController extends Controller {
         ]);
     }
 
-    public function showInfo() {
-        $this->isConnected('client');
-        
-        return $this->view('client/showInfo', [
-            'title' => 'Connecté',
-            'username' => $_SESSION['username'],
-            'style' => [
-                'accueil',
-                'style',
-            ]
-        ]);
-    }
-
     public function mesComptes() {
-        $this->isConnected('client');
+        $this->isConnected(['client']);
 
         return $this->view('client/mesComptes', [
             'title' => 'Mes Comptes',
@@ -46,7 +33,7 @@ class ClientController extends Controller {
     }
 
     public function mesImpayes() {
-        $this->isConnected('client');
+        $this->isConnected(['client']);
 
         return $this->view('client/mesImpayes', [
             'title' => 'Mes impayés',

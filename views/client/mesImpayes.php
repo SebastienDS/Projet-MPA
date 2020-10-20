@@ -22,13 +22,13 @@
 <div class="footer-fixed flex-end center-y">
 
     <div class="DL-btns space-around">
-        <form>
+        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/pdf/impayes" method="POST">
             <button class="btn">PDF</button>
         </form>
-        <form>
+        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/xls/impayes" method="POST">
             <button class="btn">XLS</button>
         </form>
-        <form>
+        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/csv/impayes" method="POST">
             <button class="btn">CSV</button>
         </form>
     </div>
