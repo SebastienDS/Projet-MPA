@@ -44,4 +44,17 @@ class ClientController extends Controller {
             ]
         ]);
     }
+
+    public function mesImpayes() {
+        $this->isConnected('client');
+
+        return $this->view('client/mesImpayes', [
+            'title' => 'Mes impayés',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes'
+            ]
+        ]);
+    }
 }

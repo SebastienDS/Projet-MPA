@@ -7,7 +7,7 @@
         <a href="<?= SCRIPT_NAME ?>/bank.php/client/mesComptes" class="headerBtn center-x center-y">
             Mes Comptes
         </a>
-        <a href="" class="headerBtn center-x center-y">
+        <a href="<?= SCRIPT_NAME ?>/bank.php/client/mesImpayes" class="headerBtn center-x center-y">
             Mes Impayés
         </a>
     </div>

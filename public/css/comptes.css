@@ -49,7 +49,7 @@ td {
     content: '€';
 }
 
-.DL-btn {
+.btn {
     background-color: #ffe800ff;
     border: 1px solid black;
     border-radius: 5px;
@@ -59,4 +59,10 @@ td {
 .DL-btns {
     width: 20%;
     margin-right: 15px;
+}
+
+.graphique {
+    height: calc(100% - 200px - 8rem - 100px + 2px);
+    background-color: #fff;
+    padding: 50px;
 }

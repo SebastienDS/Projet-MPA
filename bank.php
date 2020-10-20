@@ -27,6 +27,7 @@ $router->get('/client/changePassword', 'App\Controllers\ConnexionController@chan
 $router->post('/client/password/validation', 'App\Controllers\ConnexionController@passwordValidation');
 $router->get('/client/mesComptes', 'App\Controllers\ClientController@mesComptes');
 $router->get('/client/compte/:id', 'App\Controllers\CompteController@detail');
+$router->get('/client/mesImpayes', 'App\Controllers\ClientController@mesImpayes');
 
 
 

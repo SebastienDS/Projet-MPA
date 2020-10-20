@@ -61,3 +61,7 @@ a {
     height: 3rem;
     background-color: lawngreen;
 }
+
+.w-70 {
+    width: 70%;
+}
