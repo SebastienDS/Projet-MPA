@@ -1,19 +1,20 @@
 <?php require_once('views/include/headerClient.php') ?>
 
 <div class="bandeau center-x center-y">
-    <form action="" class="space-around w-70">
+    <form action="<?= SCRIPT_NAME ?>/bank.php/client/mesImpayes" class="space-around w-70">
         <div>
             <label for="dateDebut">Date de début</label>
-            <input type="date" id="dateDebut" name="dateDebut">
+            <input type="date" id="dateDebut" name="dateDebut" value="<?= $dateDebut ?>">
         </div>
         <div>
             <label for="dateFin">Date de fin</label>
-            <input type="date" id="dateFin" name="dateFin">
+            <input type="date" id="dateFin" name="dateFin" value="<?= $dateFin ?>">
         </div>
 
         <button type="submit" class="btn">Graphique</button>
     </form>
 </div>
+
 
 <div id="graphique" class="graphique">
 
@@ -40,13 +41,7 @@
     google.charts.load('current', {'packages': [ 'bar' ] });
 
     google.charts.setOnLoadCallback(() => {
-        const data = new google.visualization.arrayToDataTable([
-            ['Mois', 'Impayés CB', 'Impayés Visa', 'Impayés Mastercard'],
-            ['Juin 2020', 250, 0, 0],
-            ['Juillet 2020', 1250, 200, 0],
-            ['Aout 2020', 0, 0, 0],
-            ['Septembre 2020', 0, 0, 750]
-        ]);
+        const data = new google.visualization.arrayToDataTable(<?= json_encode($impayes) ?>);
 
         const options = {
             title: 'Impayés',

@@ -4,6 +4,8 @@
 namespace App\Controllers;
 
 
+use App\Models\Transaction;
+
 class ClientController extends Controller {
     public function accueil() {
         $this->isConnected(['client']);
@@ -35,13 +37,29 @@ class ClientController extends Controller {
     public function mesImpayes() {
         $this->isConnected(['client']);
 
+        $dates = Transaction::getDates();
+        $dateDebut = htmlentities($_GET['dateDebut'] ?? $dates[0]->datetr);
+        $dateFin = htmlentities($_GET['dateFin'] ?? end($dates)->datetr);
+
+        $impayes = Transaction::getImpayes($dateDebut, $dateFin);
+        foreach ($impayes as $key => $row) {
+            for ($i = 1; $i < count($row); $i++) {
+                $impayes[$key][$i] = (int)$row[$i];
+            }
+        }
+        array_unshift($impayes, ['Mois', 'Impayés CB', 'Impayés Visa', 'Impayés Mastercard']);
+
+
         return $this->view('client/mesImpayes', [
             'title' => 'Mes impayés',
             'style' => [
                 'accueil',
                 'style',
                 'comptes'
-            ]
+            ],
+            'dateDebut' => $dateDebut,
+            'dateFin' => $dateFin,
+            'impayes' => $impayes
         ]);
     }
 }
