@@ -33,6 +33,7 @@ $router->get('/client/mesImpayes', 'App\Controllers\ClientController@mesImpayes'
 
 
 $router->get('/admin', 'App\Controllers\AdminController@accueil');
+$router->post('/admin/deleteCompte/:id', 'App\Controllers\AdminController@deleteCompte');
 
 
 $router->post('/client/download/pdf/compte/:id', 'App\Controllers\DownloadController@downloadComptePDF');

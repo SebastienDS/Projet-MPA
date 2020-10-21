@@ -66,3 +66,8 @@ td {
     background-color: #fff;
     padding: 50px;
 }
+
+.compteItem {
+    padding: 10px 15px;
+    border-bottom: 1px solid black;
+}

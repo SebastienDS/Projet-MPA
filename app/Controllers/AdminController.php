@@ -14,8 +14,13 @@ class AdminController extends Controller {
             'style' => [
                 'accueil',
                 'style',
-                'comptes'
+                'comptes',
+                'modal'
             ]
         ]);
+    }
+
+    public function deleteCompte(int $id) {
+
     }
 }
