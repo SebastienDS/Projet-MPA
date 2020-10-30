@@ -1,4 +1,4 @@
-<?php require_once('views/include/headerAdmin.php') ?>
+<?php require_once('views/include/header.php') ?>
 
 <div class="bandeau flex-end center-y">
     <form action="<?= SCRIPT_NAME ?>/bank.php/admin">

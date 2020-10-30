@@ -8,6 +8,10 @@ html, body, .max-height {
     height: 100%;
 }
 
+.max-width {
+    width: 100%;
+}
+
 body {
     background-image: url("../img/fond_ecran.png");
     background-repeat: no-repeat;
@@ -30,7 +34,13 @@ a {
 }
 
 .column {
+    display: flex;
     flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
 }
 
 .flex-end {
@@ -68,4 +78,12 @@ a {
 
 .p-15 {
     padding: 15px;
+}
+
+input:invalid:required {
+    border: 1px solid red;
+}
+
+input:valid {
+    border: 1px solid green;
 }

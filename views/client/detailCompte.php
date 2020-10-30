@@ -1,4 +1,4 @@
-<?php require_once('views/include/headerClient.php'); ?>
+<?php require_once('views/include/header.php') ?>
 
 <div class="bandeau center-y flex-end">
     <form action="">

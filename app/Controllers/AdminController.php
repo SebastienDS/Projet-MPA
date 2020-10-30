@@ -20,6 +20,26 @@ class AdminController extends Controller {
         ]);
     }
 
+    public function ajoutCompte() {
+        $this->isConnected(['admin']);
+
+        $this->view('admin/ajoutCompte', [
+            'title' => 'Ajout Compte',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes',
+            ]
+        ]);
+    }
+
+    public function creationCompte() {
+        $this->isConnected(['admin']);
+
+        
+        return var_dump($_POST);
+    }
+
     public function deleteCompte(int $id) {
 
     }

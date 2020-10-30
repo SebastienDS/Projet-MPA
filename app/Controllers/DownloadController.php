@@ -12,7 +12,11 @@ class DownloadController extends Controller {
         return $this->view('downloadCompte', [
             'title' => 'Téléchargement PDF',
             'type' => 'PDF',
-            'numeroCompte' => $id
+            'numeroCompte' => $id,
+            'style' => [
+                'accueil',
+                'style'
+            ]
         ]);
     }
 
@@ -22,7 +26,11 @@ class DownloadController extends Controller {
         return $this->view('downloadCompte', [
             'title' => 'Téléchargement XLS',
             'type' => 'XLS',
-            'numeroCompte' => $id
+            'numeroCompte' => $id,
+            'style' => [
+                'accueil',
+                'style'
+            ]
         ]);
     }
 
@@ -32,7 +40,11 @@ class DownloadController extends Controller {
         return $this->view('downloadCompte', [
             'title' => 'Téléchargement CSV',
             'type' => 'CSV',
-            'numeroCompte' => $id
+            'numeroCompte' => $id,
+            'style' => [
+                'accueil',
+                'style'
+            ]
         ]);
     }
 
@@ -41,7 +53,11 @@ class DownloadController extends Controller {
 
         return $this->view('downloadImpayes', [
             'title' => 'Téléchargement PDF',
-            'type' => 'PDF'
+            'type' => 'PDF',
+            'style' => [
+                'accueil',
+                'style'
+            ]
         ]);
     }
 
@@ -50,7 +66,11 @@ class DownloadController extends Controller {
 
         return $this->view('downloadImpayes', [
             'title' => 'Téléchargement XLS',
-            'type' => 'XLS'
+            'type' => 'XLS',
+            'style' => [
+                'accueil',
+                'style'
+            ]
         ]);
     }
 
@@ -59,7 +79,11 @@ class DownloadController extends Controller {
 
         return $this->view('downloadImpayes', [
             'title' => 'Téléchargement CSV',
-            'type' => 'CSV'
+            'type' => 'CSV',
+            'style' => [
+                'accueil',
+                'style'
+            ]
         ]);
     }
 }

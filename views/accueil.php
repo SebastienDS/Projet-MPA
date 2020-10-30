@@ -1,6 +1,7 @@
 
 <div class="space-between column max-height">
-    <?php require_once('include/headerAccueil.php') ?>
+    <?php require_once('views/include/header.php') ?>
+
 
     <div class="slogan center-x center-y">
         <h1>Élue meilleure banque de france</h1>

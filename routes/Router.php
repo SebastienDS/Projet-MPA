@@ -27,6 +27,7 @@ class Router {
             }
         }
 
-        return header('HTTP/1.0 404 Not Found');
+        header('HTTP/1.0 404 Not Found');
+        return header('Location: '. SCRIPT_NAME . '/bank.php/404');
     }
 }

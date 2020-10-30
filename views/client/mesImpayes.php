@@ -1,4 +1,4 @@
-<?php require_once('views/include/headerClient.php') ?>
+<?php require_once('views/include/header.php') ?>
 
 <div class="bandeau center-x center-y">
     <form action="<?= SCRIPT_NAME ?>/bank.php/client/mesImpayes" class="space-around w-70">
@@ -16,7 +16,7 @@
 </div>
 
 
-<div id="graphique" class="graphique">
+<div id="graphique" class="graphique body">
 
 </div>
 

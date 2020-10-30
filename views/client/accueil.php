@@ -1,4 +1,5 @@
-<?php require_once('views/include/headerClient.php'); ?>
+<?php require_once('views/include/header.php') ?>
+
 <?php if ($success): ?>
     <div class="success center-x center-y">
         <?php if ($success === 1): ?>

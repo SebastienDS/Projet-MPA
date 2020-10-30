@@ -1,4 +1,4 @@
-<?php require_once('include/headerAccueil.php') ?>
+<?php require_once('views/include/header.php') ?>
 
 <div class="form-connexion-container center-x center-y">
     <form class="connexion-form space-around column" method='POST' action="<?= SCRIPT_NAME ?>/bank.php/connexion/validation">
@@ -8,10 +8,10 @@
             </div>
         <?php endif ?>
         <div class="center-x center-y">
-            <input type="text" placeholder="Username" class="form-btn" name="username">
+            <input type="text" placeholder="Username" class="form-btn" name="username" required>
         </div>
         <div class="center-x center-y">
-            <input type="password" placeholder="Password" class="form-btn" name="password">
+            <input type="password" placeholder="Password" class="form-btn" name="password" required>
         </div>
 
         <div class="space-around">

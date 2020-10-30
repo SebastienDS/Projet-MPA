@@ -1,4 +1,4 @@
-<?php require_once('views/include/headerClient.php'); ?>
+<?php require_once('views/include/header.php') ?>
 
 <div class="form-connexion-container center-x center-y">
     <form class="connexion-form space-around column" method='POST' action="<?= SCRIPT_NAME ?>/bank.php/password/validation">
@@ -14,13 +14,13 @@
             </div>
         <?php endif ?>
         <div class="center-x center-y">
-            <input type="password" placeholder="Ancien Mot de Passe" class="form-btn" name="lastPassword">
+            <input type="password" placeholder="Ancien Mot de Passe" class="form-btn" name="lastPassword" required>
         </div>
         <div class="center-x center-y">
-            <input type="password" placeholder="Nouveau Mot de Passe" class="form-btn" name="newPassword">
+            <input type="password" placeholder="Nouveau Mot de Passe" class="form-btn" name="newPassword" required>
         </div>
         <div class="center-x center-y">
-            <input type="password" placeholder="Confirmer Mot de Passe" class="form-btn" name="newPasswordConfirm">
+            <input type="password" placeholder="Confirmer Mot de Passe" class="form-btn" name="newPasswordConfirm" required>
         </div>
 
         <div class="center-x center-y">

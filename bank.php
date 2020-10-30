@@ -16,6 +16,7 @@ $url = substr($fullUrl, strlen($prefix));
 $router = new Router($url);
 
 $router->get('/', 'App\Controllers\AccueilController@index');
+$router->get('/404', 'App\Controllers\NotFoundController@notFound');
 
 $router->get('/connexion', 'App\Controllers\ConnexionController@connexion');
 $router->post('/connexion/validation', 'App\Controllers\ConnexionController@validConnexion');
@@ -33,6 +34,8 @@ $router->get('/client/mesImpayes', 'App\Controllers\ClientController@mesImpayes'
 
 
 $router->get('/admin', 'App\Controllers\AdminController@accueil');
+$router->get('/admin/ajoutCompte', 'App\Controllers\AdminController@ajoutCompte');
+$router->post('/admin/ajoutCompte', 'App\Controllers\AdminController@creationCompte');
 $router->post('/admin/deleteCompte/:id', 'App\Controllers\AdminController@deleteCompte');
 
 
