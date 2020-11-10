@@ -2,11 +2,11 @@
 
 <div class="bandeau center-x center-y">
     <form action="<?= SCRIPT_NAME ?>/bank.php/client/mesImpayes" class="space-around w-70">
-        <div>
+        <div class="center-y">
             <label for="dateDebut">Date de début</label>
             <input type="date" id="dateDebut" name="dateDebut" value="<?= $dateDebut ?>">
         </div>
-        <div>
+        <div class="center-y">
             <label for="dateFin">Date de fin</label>
             <input type="date" id="dateFin" name="dateFin" value="<?= $dateFin ?>">
         </div>
