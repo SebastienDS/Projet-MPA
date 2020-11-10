@@ -16,7 +16,7 @@
         <ul id="menu-deroulant">
             <li>
                 <a href="<?= SCRIPT_NAME ?>/bank.php/showInfo">
-                    <img src="<?= SCRIPT_NAME ?>/public/img/logo.png" width="200" height="200">
+                    <img src="<?= SCRIPT_NAME ?>/public/img/profil.png" width="200" height="200">
                 </a>
                 <ul>
                     <li><a href="<?= SCRIPT_NAME ?>/bank.php/changePassword">Changer de Mot de Passe</a></li>
