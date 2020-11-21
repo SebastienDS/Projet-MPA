@@ -20,9 +20,11 @@ abstract class Model {
         return $stmt->fetchAll();
     }
 
-    public static function findById(int $id): Model {
+    public static function findById(int $id, array $infosRequired = []): Model {
         $table = static::getTable();
-        $stmt = DBConnection::getPDO()->prepare("SELECT * FROM {$table} WHERE id = ?");
+        $columns = $infosRequired ? implode(', ', $infosRequired) : '*';
+
+        $stmt = DBConnection::getPDO()->prepare("SELECT {$columns} FROM {$table} WHERE id = ?");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute([$id]);
         return $stmt->fetch();
