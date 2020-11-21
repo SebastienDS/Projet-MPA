@@ -1,8 +1,8 @@
 <?php require_once('views/include/header.php') ?>
 
 <div class="bandeau flex-end center-y">
-    <form action="<?= SCRIPT_NAME ?>/bank.php/admin">
-        <input type="text" placeholder="Recherche">
+    <form>
+        <input type="text" placeholder="Recherche" name="search">
         <button type="submit">Rechercher</button>
     </form>
 </div>
@@ -12,8 +12,8 @@
         <a href="<?= SCRIPT_NAME ?>/bank.php/admin/ajoutCompte" class="btn">Ajouter un compte</a>
     </div>
 
-    <?php foreach ($comptes as $i => $compte): ?>
-        <div>
+    <?php foreach ($comptes as $compte): ?>
+        <a href="<?= SCRIPT_NAME ?>/bank.php/admin/updateCompte/<?= $compte->id ?>">
             <div class="space-between compteItem center-y">
                 <div class="column">
                     <div>
@@ -24,11 +24,13 @@
                     </div>
                 </div>
 
-                <img src="<?= SCRIPT_NAME ?>/public/img/trash.png" alt="delete button" height="50" id="deleteBtn" key="<?= $i ?>">
+                <form id="deleteForm">
+                    <img src="<?= SCRIPT_NAME ?>/public/img/trash.png" alt="delete button" height="50">
+                    <input type="hidden" name="id" value="<?= $compte->id ?>">
+                </form>
             </div>
-        </div>
+        </a>
     <?php endforeach ?>
-
 </div>
 
 
@@ -43,8 +45,8 @@
         </p>
 
         <div class="space-around w-70">
-            <form>
-                <button type="submit" class="btn-success" id="submitBtn">Oui</button>
+            <form id="submitBtn">
+                <button type="submit" class="btn-success">Oui</button>
             </form>
             <button class="btn-failure" id="closeBtn">Non</button>
         </div>
@@ -54,15 +56,16 @@
 
 <script>
     const modal = document.getElementById("modal");
-    const deleteBtns = document.querySelectorAll("#deleteBtn");
     const closeBtn = document.getElementById("closeBtn");
     const submitBtn = document.getElementById("submitBtn");
+    const deleteForms = document.querySelectorAll("#deleteForm");
     let selected = null;
 
-    deleteBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+    deleteForms.forEach(btn => {
+        btn.addEventListener('click', (e) => {
             modal.style.display = 'block';
-            selected = btn.getAttribute('key');
+            selected = btn.querySelector('input').value;
+            e.preventDefault();
         });
     });
 

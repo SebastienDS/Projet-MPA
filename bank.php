@@ -37,6 +37,8 @@ $router->get('/admin', 'App\Controllers\AdminController@accueil');
 $router->get('/admin/ajoutCompte', 'App\Controllers\AdminController@ajoutCompte');
 $router->post('/admin/ajoutCompte', 'App\Controllers\AdminController@creationCompte');
 $router->post('/admin/deleteCompte/:id', 'App\Controllers\AdminController@deleteCompte');
+$router->get('/admin/updateCompte/:id', 'App\Controllers\AdminController@updateCompte');
+$router->post('/admin/updateCompte/:id', 'App\Controllers\AdminController@updateProfil');
 
 
 $router->post('/client/download/pdf/compte/:id', 'App\Controllers\DownloadController@downloadComptePDF');

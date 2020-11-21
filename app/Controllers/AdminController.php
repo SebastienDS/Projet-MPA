@@ -11,7 +11,12 @@ class AdminController extends Controller {
     public function accueil() {
         $this->isConnected(['admin']);
 
-        $comptes = Profil::getColumns(['nom', 'prenom']);
+
+        if (isset($_GET['search'])) {
+            $comptes = [Profil::findById($_GET['search'], ['id', 'nom', 'prenom'])];
+        } else {
+            $comptes = Profil::getColumns(['id', 'nom', 'prenom']);
+        }
 
         return $this->view('admin/accueil', [
             'title' => 'Accueil',
@@ -28,7 +33,7 @@ class AdminController extends Controller {
     public function ajoutCompte() {
         $this->isConnected(['admin']);
 
-        $this->view('admin/ajoutCompte', [
+        return $this->view('admin/ajoutCompte', [
             'title' => 'Ajout Compte',
             'style' => [
                 'accueil',
@@ -41,11 +46,40 @@ class AdminController extends Controller {
     public function creationCompte() {
         $this->isConnected(['admin']);
 
-        
-        return var_dump($_POST);
+        $infos = array_filter($_POST);
+        if (count($infos) !== count($_POST)) return header('Location: '. SCRIPT_NAME .'/bank.php/admin/ajoutCompte');
+        $id = Profil::create($infos['nom'], $infos['prenom'], $infos['password']);
+        return header('Location: '. SCRIPT_NAME ."/bank.php/admin/updateCompte/{$id}");
     }
 
     public function deleteCompte(int $id) {
+        $this->isConnected(['admin']);
 
+        Profil::delete($id);
+    }
+
+    public function updateCompte(int $id) {
+        $this->isConnected(['admin']);
+
+        $infos = Profil::findById($id, ['id', 'nom', 'prenom']);
+
+        return $this->view('admin/updateCompte', [
+            'title' => 'Update Compte',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes',
+            ],
+            'infos' => $infos
+        ]);
+    }
+
+    public function updateProfil(int $id) {
+        $this->isConnected(['admin']);
+
+        $infos = array_filter($_POST);
+        if (count($infos) < 2) return header('Location: '. SCRIPT_NAME .'/bank.php/admin/ajoutCompte');
+        Profil::update($id, $infos);
+        return header('Location: '. SCRIPT_NAME .'/bank.php/admin');
     }
 }
