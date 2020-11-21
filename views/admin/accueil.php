@@ -12,24 +12,25 @@
         <a href="<?= SCRIPT_NAME ?>/bank.php/admin/ajoutCompte" class="btn">Ajouter un compte</a>
     </div>
 
-   <?php for ($i = 0; $i < 10; $i++): ?>
-       <div>
-           <div class="space-between compteItem center-y">
-               <div class="column">
-                   <div>
-                       Nom Prénom
-                   </div>
-                   <div>
-                       Numéro de SIREN
-                   </div>
-               </div>
+    <?php foreach ($comptes as $i => $compte): ?>
+        <div>
+            <div class="space-between compteItem center-y">
+                <div class="column">
+                    <div>
+                        <?= $compte->nom ?> <?= $compte->prenom ?>
+                    </div>
+                    <div>
+                        Numéro de SIREN
+                    </div>
+                </div>
 
-               <img src="<?= SCRIPT_NAME ?>/public/img/trash.png" alt="delete button" height="50" id="deleteBtn" key="<?= $i ?>">
-           </div>
-       </div>
-    <?php endfor ?>
+                <img src="<?= SCRIPT_NAME ?>/public/img/trash.png" alt="delete button" height="50" id="deleteBtn" key="<?= $i ?>">
+            </div>
+        </div>
+    <?php endforeach ?>
 
 </div>
+
 
 
 
@@ -70,7 +71,7 @@
     });
 
     window.addEventListener('click', (event) => {
-        if (event.target == modal) {
+        if (event.target === modal) {
             modal.style.display = "none";
         }
     });

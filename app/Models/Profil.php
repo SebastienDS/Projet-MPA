@@ -8,14 +8,11 @@ use Database\DBConnection;
 
 class Profil extends Model {
 
-    protected static $table = 'Profilmpa';
-
     public static function getTable(): string {
-        return self::$table;
+        return 'Profilmpa';
     }
-
     public static function updatePassword(string $username, string $lastPassword, string $newPassword) {
-        $tableName = self::$table;
+        $tableName = self::getTable();
         $stmt = DBConnection::getPDO()->prepare("UPDATE {$tableName} SET pwd = ? WHERE pseudo = ? AND pwd = ?");
         $stmt->execute([sha1($newPassword), $username, sha1($lastPassword)]);
         return $stmt->rowCount();

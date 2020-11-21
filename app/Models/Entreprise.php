@@ -4,9 +4,9 @@
 namespace App\Models;
 
 
-class ProductOwner extends Model {
+class Entreprise extends Model {
 
     public static function getTable(): string {
-        return 'PO';
+        return 'Entreprise';
     }
 }

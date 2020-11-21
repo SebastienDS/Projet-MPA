@@ -9,20 +9,30 @@ use PDO;
 
 abstract class Model {
 
-    protected static $table;
+    public static function getTable(): string {
+        throw new \Exception('overload required');
+    }
 
     public static function all(): array {
-        $table = self::$table;
+        $table = static::getTable();
         $stmt = DBConnection::getPDO()->query("SELECT * FROM {$table}");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $stmt->fetchAll();
     }
 
     public static function findById(int $id): Model {
-        $table = self::$table;
+        $table = static::getTable();
         $stmt = DBConnection::getPDO()->prepare("SELECT * FROM {$table} WHERE id = ?");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute([$id]);
         return $stmt->fetch();
+    }
+
+    public static function getColumns(array $infosRequired) {
+        $table = static::getTable();
+        $columns = implode(', ', $infosRequired);
+        $stmt = DBConnection::getPDO()->query("SELECT {$columns} FROM {$table}");
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $stmt->fetchAll();
     }
 }

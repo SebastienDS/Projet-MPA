@@ -8,14 +8,12 @@ use Database\DBConnection;
 
 class Client extends Model {
 
-    protected static $table = 'Client';
-
     public static function getTable(): string {
-        return self::$table;
+        return 'Client';
     }
 
     public static function isConnected(string $username, string $password) {
-        $tableName = self::$table;
+        $tableName = self::getTable();
         $tableJoin = Profil::getTable();
         $stmt = DBConnection::getPDO()->prepare("SELECT count(id)
             FROM {$tableName}

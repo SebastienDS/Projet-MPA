@@ -4,10 +4,14 @@
 namespace App\Controllers;
 
 
+use App\Models\Profil;
+
 class AdminController extends Controller {
 
     public function accueil() {
         $this->isConnected(['admin']);
+
+        $comptes = Profil::getColumns(['nom', 'prenom']);
 
         return $this->view('admin/accueil', [
             'title' => 'Accueil',
@@ -16,7 +20,8 @@ class AdminController extends Controller {
                 'style',
                 'comptes',
                 'modal'
-            ]
+            ],
+            'comptes' => $comptes
         ]);
     }
 

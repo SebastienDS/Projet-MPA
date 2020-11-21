@@ -8,21 +8,19 @@ use Database\DBConnection;
 
 class Transaction extends Model {
 
-    protected static $table = 'Transaction';
-
     public static function getTable(): string {
-        return self::$table;
+        return 'Transaction';
     }
 
     public static function getDates(): array {
-        $table = self::$table;
+        $table = self::getTable();
         $stmt = DBConnection::getPDO()->query("SELECT datetr FROM {$table} ORDER BY datetr");
         $stmt->setFetchMode(PDO::FETCH_OBJ);
         return $stmt->fetchAll();
     }
 
     public static function getImpayes(string $dateDebut, string $dateFin) {
-        $table = self::$table;
+        $table = self::getTable();
         $stmt = DBConnection::getPDO()->prepare("SELECT 
                 CONCAT(MONTHNAME(datetr), ' ', YEAR(datetr)) AS date, 
                 - IFNULL(LEAST(SUM(CASE WHEN moyenPay = 'CB' THEN MTrans END), 0), 0) AS CB,
