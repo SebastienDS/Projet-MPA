@@ -14,6 +14,7 @@ class AdminController extends Controller {
 
         if (isset($_GET['search'])) {
             $comptes = [Profil::findById($_GET['search'], ['id', 'nom', 'prenom'])];
+            //error bad id
         } else {
             $comptes = Profil::getColumns(['id', 'nom', 'prenom']);
         }

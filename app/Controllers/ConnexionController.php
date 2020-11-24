@@ -30,6 +30,7 @@ class ConnexionController extends Controller {
 
         if (Client::isConnected($username, $password)) {
             $_SESSION['auth'] = 'client';
+            $_SESSION['id'] = Profil::getIdWhere(['pseudo' => $username, 'pwd' => sha1($password)]);
             return header('Location: '. SCRIPT_NAME .'/bank.php/client?success=1');
         }
         if (Admin::isConnected($username, $password)) {

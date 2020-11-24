@@ -1,7 +1,7 @@
 <?php require_once('views/include/header.php') ?>
 
 <div class="bandeau center-y">
-    Nom Prénom Numéro
+    <?= $client->nom ?> <?= $client->prenom ?>
 </div>
 
 <div class="bg-white column center-y">

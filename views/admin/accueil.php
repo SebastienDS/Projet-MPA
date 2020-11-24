@@ -15,13 +15,8 @@
     <?php foreach ($comptes as $compte): ?>
         <a href="<?= SCRIPT_NAME ?>/bank.php/admin/updateCompte/<?= $compte->id ?>">
             <div class="space-between compteItem center-y">
-                <div class="column">
-                    <div>
-                        <?= $compte->nom ?> <?= $compte->prenom ?>
-                    </div>
-                    <div>
-                        Numéro de SIREN
-                    </div>
+                <div>
+                    <?= $compte->nom ?> <?= $compte->prenom ?>
                 </div>
 
                 <form id="deleteForm">

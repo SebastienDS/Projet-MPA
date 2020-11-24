@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 
+use App\Models\Profil;
 use App\Models\Transaction;
 
 class ClientController extends Controller {
@@ -24,13 +25,16 @@ class ClientController extends Controller {
     public function mesComptes() {
         $this->isConnected(['client']);
 
+        $client = Profil::findById($_SESSION['id'], ['nom', 'prenom']);
+
         return $this->view('client/mesComptes', [
             'title' => 'Mes Comptes',
             'style' => [
                 'accueil',
                 'style',
                 'comptes'
-            ]
+            ],
+            'client' => $client
         ]);
     }
 

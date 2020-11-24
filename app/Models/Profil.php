@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use Database\DBConnection;
+use PDO;
 
 class Profil extends Model {
 
@@ -44,5 +45,17 @@ class Profil extends Model {
 
         $stmt = DBConnection::getPDO()->prepare("UPDATE {$tableName} SET nom = :nom, prenom = :prenom {$passwordQuery} WHERE id = :id");
         $stmt->execute($columnsUpdated);
+    }
+
+    public static function getIdWhere(array $whereConditions): int {
+        $tableName = self::getTable();
+        $queryCondition = implode(' and ', array_map(function($condition) {
+            return "$condition = :$condition";
+        }, array_keys($whereConditions)));
+
+        $stmt = DBConnection::getPDO()->prepare("SELECT id FROM {$tableName} WHERE {$queryCondition}");
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute($whereConditions);
+        return $stmt->fetch()->id;
     }
 }
