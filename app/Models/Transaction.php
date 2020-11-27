@@ -19,7 +19,7 @@ class Transaction extends Model {
         return $stmt->fetchAll();
     }
 
-    public static function getImpayes(string $dateDebut, string $dateFin) {
+    public static function getImpayes(string $dateDebut, string $dateFin): array {
         $table = self::getTable();
         $stmt = DBConnection::getPDO()->prepare("SELECT 
                 CONCAT(MONTHNAME(datetr), ' ', YEAR(datetr)) AS date, 
@@ -32,6 +32,18 @@ class Transaction extends Model {
             ORDER BY datetr");
         $stmt->setFetchMode(PDO::FETCH_NUM);
         $stmt->execute([$dateDebut, $dateFin]);
+        return $stmt->fetchAll();
+    }
+
+    public static function getInfos(int $idCompte, string $orderBy = 'datetr', string $orderdirection = 'DESC'): array {
+        $table = self::getTable();
+        $entrepriseTable = Entreprise::getTable();
+
+        $stmt = DBConnection::getPDO()->prepare("SELECT NSIREN as 'siren', Raison_Sociale as 'raisonSociale', 
+            datetr as 'date', count(datetr) as 'nombreTransactions', 'Euro', moyenPay, sum(Mtrans) as 'montantTotal' 
+            FROM {$table} JOIN {$entrepriseTable} on NSIREN = N_SIREN WHERE id = ? GROUP BY datetr, NSIREN ORDER BY {$orderBy} {$orderdirection}");
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute([$idCompte]);
         return $stmt->fetchAll();
     }
 }

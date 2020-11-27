@@ -102,3 +102,23 @@ td {
     width: 100%;
     justify-content: space-around;
 }
+
+.montantPositif {
+    background-color: #B1E46A;
+}
+
+.montantNegatif {
+    background-color: #F76D6D;
+}
+
+.caracteristiques {
+    background-color: #F383C7;
+}
+
+.tablesHeight {
+    min-height: calc(100% - 200px - 2rem - 4.5rem);
+}
+
+.minHeight {
+    min-height: calc(100% - 212px - 2rem);
+}

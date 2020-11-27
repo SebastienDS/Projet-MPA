@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 
+use App\Models\Compte;
 use App\Models\Profil;
 use App\Models\Transaction;
 
@@ -26,6 +27,7 @@ class ClientController extends Controller {
         $this->isConnected(['client']);
 
         $client = Profil::findById($_SESSION['id'], ['nom', 'prenom']);
+        $comptes = Compte::getInfos();
 
         return $this->view('client/mesComptes', [
             'title' => 'Mes Comptes',
@@ -34,7 +36,8 @@ class ClientController extends Controller {
                 'style',
                 'comptes'
             ],
-            'client' => $client
+            'client' => $client,
+            'comptes' => $comptes
         ]);
     }
 

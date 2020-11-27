@@ -4,21 +4,17 @@
     <?= $client->nom ?> <?= $client->prenom ?>
 </div>
 
-<div class="bg-white column center-y">
-    <?php for ($i = 0; $i <= 5; $i++): ?>
-        <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $i ?>" class="compte space-around center-y">
+<div class="bg-white column center-y minHeight">
+    <?php foreach ($comptes as $compte): ?>
+        <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $compte->id ?>" class="compte space-around center-y">
             <div class="column">
-                <div>Nom du compte</div>
-                <div>Numéro compte</div>
+                <div> Nom du compte : <?= $compte->nom ?> </div>
+                <div> Numéro compte : <?= $compte->id ?> </div>
             </div>
 
-            <div>
-                Nombre de transaction
-            </div>
+            <div> Nombre de transaction : <?= $compte->nombreTransactions ?> </div>
 
-            <div>
-                Argent
-            </div>
+            <div class="total"> Solde : <?= $compte->solde ?> </div>
         </a>
-    <?php endfor ?>
+    <?php endforeach; ?>
 </div>

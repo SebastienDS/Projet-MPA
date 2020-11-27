@@ -14,7 +14,7 @@
     </form>
 </div>
 
-<table class="bg-white">
+<table class="caracteristiques tablesHeight">
     <tr>
         <th>
             Numéro de SIREN
@@ -23,16 +23,16 @@
             Raison sociale
         </th>
         <th>
-            Numéro remise
-        </th>
-        <th>
             Date traitement
         </th>
         <th>
             Nombre de transactions
         </th>
         <th>
-            Devise(EUR)
+            Devise
+        </th>
+        <th>
+            Moyen de paiement
         </th>
         <th>
             Montant total
@@ -41,66 +41,18 @@
             Sens + ou -
         </th>
     </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>555</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>555</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>555</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>555</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>555</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>555</td>
-        <td></td>
-    </tr>
+    <?php foreach ($transactions as $transaction): ?>
+        <tr class="<?= $transaction->montantTotal >= 0 ? 'montantPositif' : 'montantNegatif' ?>">
+            <td><?= $transaction->siren ?></td>
+            <td><?= $transaction->raisonSociale ?></td>
+            <td><?= $transaction->date ?></td>
+            <td><?= $transaction->nombreTransactions ?></td>
+            <td><?= $transaction->Euro ?></td>
+            <td><?= $transaction->moyenPay ?></td>
+            <td><?= $transaction->montantTotal ?></td>
+            <td><?= $transaction->montantTotal >= 0 ? '+' : '-' ?></td>
+        </tr>
+    <?php endforeach; ?>
 </table>
 
 <div class="footer-fixed space-between center-y">

@@ -4,10 +4,14 @@
 namespace App\Controllers;
 
 
+use App\Models\Transaction;
+
 class CompteController extends Controller {
 
     public function detail(int $id) {
         $this->isConnected(['client']);
+
+        $transactions = Transaction::getInfos($id);
 
         return $this->view('client/detailCompte', [
             'title' => 'Detail compte',
@@ -16,7 +20,8 @@ class CompteController extends Controller {
                 'style',
                 'comptes'
             ],
-            'numeroCompte' => $id
+            'numeroCompte' => $id,
+            'transactions' => $transactions
         ]);
     }
 }
