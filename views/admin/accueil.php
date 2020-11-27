@@ -40,7 +40,7 @@
         </p>
 
         <div class="space-around w-70">
-            <form id="submitBtn">
+            <form id="submitBtn" action="<?= SCRIPT_NAME ?>/bank.php/admin/deleteCompte/" method="POST">
                 <button type="submit" class="btn-success">Oui</button>
             </form>
             <button class="btn-failure" id="closeBtn">Non</button>
@@ -68,13 +68,13 @@
         modal.style.display = 'none';
     });
 
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
             modal.style.display = "none";
         }
     });
 
     submitBtn.addEventListener('click', () => {
-        fetch(`<?= SCRIPT_NAME ?>/bank.php/admin/deleteCompte/${selected}`, { method: 'POST' });
+        submitBtn.action += selected;
     })
 </script>

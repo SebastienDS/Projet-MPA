@@ -58,4 +58,11 @@ class Profil extends Model {
         $stmt->execute($whereConditions);
         return $stmt->fetch()->id;
     }
+
+    public static function exist(int $id): bool {
+        $tableName = self::getTable();
+        $stmt = DBConnection::getPDO()->prepare("SELECT id FROM {$tableName} WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->rowCount() > 0;
+    }
 }

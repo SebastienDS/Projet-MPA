@@ -12,9 +12,8 @@ class AdminController extends Controller {
         $this->isConnected(['admin']);
 
 
-        if (isset($_GET['search'])) {
+        if (isset($_GET['search']) && Profil::exist($_GET['search'])) {
             $comptes = [Profil::findById($_GET['search'], ['id', 'nom', 'prenom'])];
-            //error bad id
         } else {
             $comptes = Profil::getColumns(['id', 'nom', 'prenom']);
         }
@@ -57,6 +56,7 @@ class AdminController extends Controller {
         $this->isConnected(['admin']);
 
         Profil::delete($id);
+        return header('Location: '. SCRIPT_NAME . '/bank.php/admin');
     }
 
     public function updateCompte(int $id) {
