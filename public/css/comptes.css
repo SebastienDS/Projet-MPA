@@ -46,7 +46,7 @@ td {
 }
 
 .total::after {
-    content: '€';
+    content: '\20AC';
 }
 
 .btn {
@@ -116,7 +116,8 @@ td {
 }
 
 .tablesHeight {
-    min-height: calc(100% - 200px - 2rem - 4.5rem);
+    min-height: calc(100% - 200px - 2rem);
+    padding-bottom: 4.5rem;
 }
 
 .minHeight {
