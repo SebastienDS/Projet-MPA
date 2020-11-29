@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 
+use App\Models\Compte;
 use App\Models\Transaction;
 
 class CompteController extends Controller {
@@ -11,7 +12,15 @@ class CompteController extends Controller {
     public function detail(int $id) {
         $this->isConnected(['client']);
 
-        $transactions = Transaction::getInfos($id);
+        $where = [];
+        $_GET = array_filter($_GET);
+        if (isset($_GET['searchingBy']) && isset($_GET['search'])) {
+            $where[$_GET['searchingBy']] = $_GET['search'];
+            // error with nombreTransactions and montantTotal
+        }
+
+        $transactions = Transaction::getInfos($id, 'date', 'DESC', $where);
+        $compteInfos = Compte::findById($id, ['solde']);
 
         return $this->view('client/detailCompte', [
             'title' => 'Detail compte',
@@ -21,7 +30,8 @@ class CompteController extends Controller {
                 'comptes'
             ],
             'numeroCompte' => $id,
-            'transactions' => $transactions
+            'transactions' => $transactions,
+            'compteInfos' => $compteInfos
         ]);
     }
 }

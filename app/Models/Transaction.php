@@ -35,15 +35,20 @@ class Transaction extends Model {
         return $stmt->fetchAll();
     }
 
-    public static function getInfos(int $idCompte, string $orderBy = 'datetr', string $orderdirection = 'DESC'): array {
+    public static function getInfos(int $idCompte, string $orderBy = 'datetr', string $orderdirection = 'DESC', array $where = []): array {
         $table = self::getTable();
         $entrepriseTable = Entreprise::getTable();
 
+        $where['id'] = $idCompte;
+        $queryCondition = implode(' and ', array_map(function($condition) {
+            return "$condition = :$condition";
+        }, array_keys($where)));
+
         $stmt = DBConnection::getPDO()->prepare("SELECT NSIREN as 'siren', Raison_Sociale as 'raisonSociale', 
             datetr as 'date', count(datetr) as 'nombreTransactions', 'Euro', moyenPay, sum(Mtrans) as 'montantTotal' 
-            FROM {$table} JOIN {$entrepriseTable} on NSIREN = N_SIREN WHERE id = ? GROUP BY datetr, NSIREN ORDER BY {$orderBy} {$orderdirection}");
+            FROM {$table} JOIN {$entrepriseTable} on NSIREN = N_SIREN WHERE {$queryCondition} GROUP BY datetr, NSIREN ORDER BY {$orderBy} {$orderdirection}");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-        $stmt->execute([$idCompte]);
+        $stmt->execute($where);
         return $stmt->fetchAll();
     }
 }
