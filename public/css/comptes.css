@@ -57,6 +57,10 @@ td {
     font-size: 18px;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
 .DL-btns {
     width: 20%;
     margin-right: 15px;

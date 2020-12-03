@@ -73,7 +73,7 @@ $otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "search
 
     <form class="center-y">
         <button type='submit' class="arrow left" name="page" value="-"></button>
-        1 / 42
+        <span class="p-15">1 / 42</span>
         <button type='submit' class="arrow right" name="page" value="+"></button>
     </form>
 
@@ -95,7 +95,7 @@ $otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "search
 
     rows.forEach(row => {
         row.addEventListener('click', () => {
-            window.location = `<?= SCRIPT_NAME ?>/bank.php/client/compte/1/detailTransaction/${row.getAttribute('siren')}/${row.getAttribute('date')}`;
+            window.location = `<?= SCRIPT_NAME ?>/bank.php/client/compte/1/transaction/${row.getAttribute('siren')}/${row.getAttribute('date')}`;
         })
         row.style.cursor = 'pointer';
     })

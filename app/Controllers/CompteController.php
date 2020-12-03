@@ -49,10 +49,10 @@ class CompteController extends Controller {
         if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'datetr'; }
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
-        $transactions = Transaction::getInfos((int)$id, $_GET['colSorted'], $_GET['sortDirection'], $where);
-        $compteInfos = Compte::findById((int)$id, ['solde']);
+        $transactions = Transaction::getTransactions($id, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        $compteInfos = Compte::findById($id, ['solde']);
 
-        return $this->view('client/detailCompte', [
+        return $this->view('client/detailTransaction', [
             'title' => 'Detail compte',
             'style' => [
                 'accueil',
@@ -61,7 +61,9 @@ class CompteController extends Controller {
             ],
             'numeroCompte' => $id,
             'transactions' => $transactions,
-            'compteInfos' => $compteInfos
+            'compteInfos' => $compteInfos,
+            'siren' => $siren,
+            'date' => $date
         ]);
     }
 }

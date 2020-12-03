@@ -18,6 +18,7 @@ $router = new Router($url);
 $router->get('/', 'App\Controllers\AccueilController@index');
 $router->get('/404', 'App\Controllers\NotFoundController@notFound');
 
+
 $router->get('/connexion', 'App\Controllers\ConnexionController@connexion');
 $router->post('/connexion/validation', 'App\Controllers\ConnexionController@validConnexion');
 $router->get('/changePassword', 'App\Controllers\ConnexionController@changePassword');
@@ -30,7 +31,7 @@ $router->get('/client', 'App\Controllers\ClientController@accueil');
 $router->get('/client/mesComptes', 'App\Controllers\ClientController@mesComptes');
 $router->get('/client/compte/:id', 'App\Controllers\CompteController@detail');
 $router->get('/client/mesImpayes', 'App\Controllers\ClientController@mesImpayes');
-$router->get('/client/compte/:id/detailTransaction/:siren/:date', 'App\Controllers\CompteController@detailTransaction');
+$router->get('/client/compte/:id/transaction/:siren/:date', 'App\Controllers\CompteController@detailTransaction');
 
 
 $router->get('/admin', 'App\Controllers\AdminController@accueil');
@@ -41,12 +42,10 @@ $router->get('/admin/updateCompte/:id', 'App\Controllers\AdminController@updateC
 $router->post('/admin/updateCompte/:id', 'App\Controllers\AdminController@updateProfil');
 
 
-$router->post('/client/download/pdf/compte/:id', 'App\Controllers\DownloadController@downloadComptePDF');
-$router->post('/client/download/xls/compte/:id', 'App\Controllers\DownloadController@downloadCompteXLS');
-$router->post('/client/download/csv/compte/:id', 'App\Controllers\DownloadController@downloadCompteCSV');
-$router->post('/client/download/pdf/impayes', 'App\Controllers\DownloadController@downloadImpayesPDF');
-$router->post('/client/download/xls/impayes', 'App\Controllers\DownloadController@downloadImpayesXLS');
-$router->post('/client/download/csv/impayes', 'App\Controllers\DownloadController@downloadImpayesCSV');
+$router->post('/client/download/:format/compte/:id', 'App\Controllers\DownloadController@downloadCompte');
+$router->post('/client/download/:format/impayes', 'App\Controllers\DownloadController@downloadImpayes');
+$router->post('/client/download/:format/compte/:id/transaction/:siren/:date', 'App\Controllers\DownloadController@downloadTransaction');
+
 
 
 $router->run();
