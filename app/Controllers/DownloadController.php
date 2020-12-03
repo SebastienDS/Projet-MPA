@@ -4,56 +4,26 @@
 namespace App\Controllers;
 
 
+use App\Models\Transaction;
+use Mpdf\Mpdf;
+
 class DownloadController extends Controller {
 
-    public function downloadComptePDF(int $id) {
+    public function downloadCompte(string $format, int $id) {
         $this->isConnected(['client']);
 
-        return $this->view('downloadCompte', [
-            'title' => 'Téléchargement PDF',
-            'type' => 'PDF',
-            'numeroCompte' => $id,
-            'style' => [
-                'accueil',
-                'style'
-            ]
-        ]);
+        $data = Transaction::getInfos($id);
+
+        $download = 'download'. strtoupper($format);
+        $this->$download($data);
     }
 
-    public function downloadCompteXLS(int $id) {
-        $this->isConnected(['client']);
-
-        return $this->view('downloadCompte', [
-            'title' => 'Téléchargement XLS',
-            'type' => 'XLS',
-            'numeroCompte' => $id,
-            'style' => [
-                'accueil',
-                'style'
-            ]
-        ]);
-    }
-
-    public function downloadCompteCSV(int $id) {
-        $this->isConnected(['client']);
-
-        return $this->view('downloadCompte', [
-            'title' => 'Téléchargement CSV',
-            'type' => 'CSV',
-            'numeroCompte' => $id,
-            'style' => [
-                'accueil',
-                'style'
-            ]
-        ]);
-    }
-
-    public function downloadImpayesPDF() {
+    public function downloadImpayes(string $format) {
         $this->isConnected(['client']);
 
         return $this->view('downloadImpayes', [
-            'title' => 'Téléchargement PDF',
-            'type' => 'PDF',
+            'title' => "Téléchargement $format",
+            'type' => $format,
             'style' => [
                 'accueil',
                 'style'
@@ -61,29 +31,58 @@ class DownloadController extends Controller {
         ]);
     }
 
-    public function downloadImpayesXLS() {
+    public function downloadTransaction(string $format, int $id, int $siren, string $date) {
         $this->isConnected(['client']);
 
-        return $this->view('downloadImpayes', [
-            'title' => 'Téléchargement XLS',
-            'type' => 'XLS',
-            'style' => [
-                'accueil',
-                'style'
-            ]
-        ]);
+        return "Telechargement de la transaction";
     }
 
-    public function downloadImpayesCSV() {
-        $this->isConnected(['client']);
+    public function downloadPDF(array $data) {
+        $content = '<table><tr>';
+        foreach (array_keys((array)$data[0]) as $key) {
+            $content .= "<th> $key </th>";
+        }
+        $content .= "</tr>";
 
-        return $this->view('downloadImpayes', [
-            'title' => 'Téléchargement CSV',
-            'type' => 'CSV',
-            'style' => [
-                'accueil',
-                'style'
-            ]
-        ]);
+        foreach ($data as $row) {
+            $content .= '<tr>';
+            foreach ($row as $value) {
+                $content .= "<td> {$value} </td>";
+            }
+            $content .= '</tr>';
+        }
+        $content .= '</table>';
+
+        $pdf = new Mpdf();
+        $pdf->WriteHTML($content);
+        $pdf->Output();
+    }
+
+    public function downloadXLS(array $data) {
+        $filename = 'export.xls';
+        header('Content-type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment; filename=$filename");
+
+        $output = fopen('php://output', 'w');
+        fputcsv($output, array_keys((array)$data[0]));
+
+        foreach ($data as $row) {
+            fputcsv($output, (array)$row);
+        }
+        fclose($output);
+    }
+
+    public function downloadCSV(array $data) {
+        $filename = 'export.csv';
+        header('Content-type: text/csv');
+        header("Content-Disposition: attachment; filename=$filename");
+
+        $output = fopen('php://output', 'w');
+        fputcsv($output, array_keys((array)$data[0]));
+
+        foreach ($data as $row) {
+            fputcsv($output, (array)$row);
+        }
+        fclose($output);
     }
 }
