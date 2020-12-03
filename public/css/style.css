@@ -87,3 +87,26 @@ input:invalid:required {
 input:valid {
     border: 1px solid green;
 }
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+}
+
+.right {
+    transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+}

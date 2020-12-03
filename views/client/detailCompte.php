@@ -1,4 +1,9 @@
-<?php require_once('views/include/header.php') ?>
+<?php require_once('views/include/header.php');
+
+$colSorted = $_GET['colSorted'];
+$sortDirection = $_GET['sortDirection'];
+$otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "searchingBy={$_GET['searchingBy']}&search={$_GET['search']}" : '';
+?>
 
 <div class="bandeau center-y flex-end">
     <form>
@@ -21,32 +26,32 @@
 <table class="caracteristiques">
     <tr>
         <th>
-            Numéro de SIREN
+            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/?colSorted=NSIREN&sortDirection=<?= ($colSorted !== 'NSIREN') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Numéro de SIREN </a>
         </th>
         <th>
-            Raison sociale
+            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/?colSorted=Raison_Sociale&sortDirection=<?= ($colSorted !== 'Raison_Sociale') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Raison sociale </a>
         </th>
         <th>
-            Date traitement
+            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/?colSorted=datetr&sortDirection=<?= ($colSorted !== 'datetr') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Date traitement </a>
         </th>
         <th>
-            Nombre de transactions
+            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/?colSorted=nombreTransactions&sortDirection=<?= ($colSorted !== 'nombreTransactions') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Nombre de transactions </a>
         </th>
         <th>
             Devise
         </th>
         <th>
-            Moyen de paiement
+            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/?colSorted=moyenPay&sortDirection=<?= ($colSorted !== 'moyenPay') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Moyen de paiement </a>
         </th>
         <th>
-            Montant total
+            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/?colSorted=montantTotal&sortDirection=<?= ($colSorted !== 'montantTotal') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Montant total </a>
         </th>
         <th>
             Sens + ou -
         </th>
     </tr>
     <?php foreach ($transactions as $transaction): ?>
-        <tr class="<?= $transaction->montantTotal >= 0 ? 'montantPositif' : 'montantNegatif' ?>">
+        <tr class="clickableRow <?= $transaction->montantTotal >= 0 ? 'montantPositif' : 'montantNegatif' ?>" siren="<?= $transaction->siren ?>" date="<?= $transaction->date ?>">
             <td><?= $transaction->siren ?></td>
             <td><?= $transaction->raisonSociale ?></td>
             <td><?= $transaction->date ?></td>
@@ -66,6 +71,12 @@
         <?= $compteInfos->solde ?>
     </div>
 
+    <form class="center-y">
+        <button type='submit' class="arrow left" name="page" value="-"></button>
+        1 / 42
+        <button type='submit' class="arrow right" name="page" value="+"></button>
+    </form>
+
     <div class="DL-btns space-around">
         <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/pdf/compte/<?= $numeroCompte ?>" method="POST">
             <button class="btn">PDF</button>
@@ -79,5 +90,13 @@
     </div>
 </div>
 
+<script>
+    const rows = document.querySelectorAll('.clickableRow');
 
-
+    rows.forEach(row => {
+        row.addEventListener('click', () => {
+            window.location = `<?= SCRIPT_NAME ?>/bank.php/client/compte/1/detailTransaction/${row.getAttribute('siren')}/${row.getAttribute('date')}`;
+        })
+        row.style.cursor = 'pointer';
+    })
+</script>

@@ -30,7 +30,7 @@ $router->get('/client', 'App\Controllers\ClientController@accueil');
 $router->get('/client/mesComptes', 'App\Controllers\ClientController@mesComptes');
 $router->get('/client/compte/:id', 'App\Controllers\CompteController@detail');
 $router->get('/client/mesImpayes', 'App\Controllers\ClientController@mesImpayes');
-
+$router->get('/client/compte/:id/detailTransaction/:siren/:date', 'App\Controllers\CompteController@detailTransaction');
 
 
 $router->get('/admin', 'App\Controllers\AdminController@accueil');
