@@ -1,4 +1,5 @@
 <?php require_once('views/include/header.php') ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="form-connexion-container center-x center-y">
     <form class="connexion-form space-around column" method='POST' action="<?= SCRIPT_NAME ?>/bank.php/connexion/validation">
@@ -11,11 +12,14 @@
             <input type="text" placeholder="Username" class="form-btn" name="username" required>
         </div>
         <div class="center-x center-y">
-            <input type="password" placeholder="Password" class="form-btn" name="password" required>
+            <div>
+                <input type="password" placeholder="Password" class="form-btn" name="password" id="password" required>
+                <label style="font: normal normal normal 40px/1 FontAwesome;" id="showPassword">&#xf06e;</label>
+            </div>
         </div>
 
-        <div class="space-around">
-            <div class="center-x center-y">
+        <div class="space-around center-y">
+            <div>
                 <input type="checkbox" name="stayConnected" id="stayConnected">
                 <label for="stayConnected">Rester connecté</label>
             </div>
@@ -23,3 +27,13 @@
         </div>
     </form>
 </div>
+
+<script>
+    const password = document.querySelector('#password');
+    const showPassword = document.querySelector('#showPassword');
+
+    showPassword.addEventListener('click', () => {
+        password.type = (password.type === 'password') ? 'text' : 'password';
+    });
+</script>
+
