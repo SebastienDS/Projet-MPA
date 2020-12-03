@@ -35,7 +35,7 @@ class Transaction extends Model {
         return $stmt->fetchAll();
     }
 
-    public static function getInfos(int $idCompte, string $orderBy = 'datetr', string $orderdirection = 'DESC', array $where = []): array {
+    public static function getInfos(int $idCompte, string $orderBy='datetr', string $orderdirection='DESC', array $where=[]): array {
         $table = self::getTable();
         $entrepriseTable = Entreprise::getTable();
 
