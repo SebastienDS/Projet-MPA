@@ -12,7 +12,16 @@ class DownloadController extends Controller {
     public function downloadCompte(string $format, int $id) {
         $this->isConnected(['client']);
 
-        $data = Transaction::getInfos($id);
+        $where = [];
+        $_GET = array_filter($_GET);
+        if (isset($_GET['searchingBy']) && isset($_GET['search'])) {
+            $where[$_GET['searchingBy']] = $_GET['search'];
+        }
+
+        if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'datetr'; }
+        if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
+
+        $data = Transaction::getInfos($id, $_GET['colSorted'], $_GET['sortDirection'], $where);
 
         $download = 'download'. strtoupper($format);
         $this->$download($data);

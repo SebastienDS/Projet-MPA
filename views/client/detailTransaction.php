@@ -73,13 +73,13 @@ $otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "search
     </form>
 
     <div class="DL-btns space-around">
-        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/:format/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $datetr ?>" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/:format/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $datetr ?>?<?= http_build_query($_GET); ?>" method="POST">
             <button class="btn">PDF</button>
         </form>
-        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/:format/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $datetr ?>" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/:format/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $datetr ?>?<?= http_build_query($_GET); ?>" method="POST">
             <button class="btn">XLS</button>
         </form>
-        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/:format/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $datetr ?>" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/:format/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $datetr ?>?<?= http_build_query($_GET); ?>" method="POST">
             <button class="btn">CSV</button>
         </form>
     </div>
