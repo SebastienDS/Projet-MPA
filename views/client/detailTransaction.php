@@ -9,7 +9,7 @@ $otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "search
     <form>
         <select name="searchingBy">
             <option value=""> Rechercher par </option>
-            <option value="NSIREN">Numero de SIREN</option>
+            <option value="N_SIREN">Numero de SIREN</option>
             <option value="Raison_Sociale">Raison sociale</option>
             <option value="datetr">Date de traitement</option>
             <option value="moyenPay">Moyen de paiement</option>
@@ -25,7 +25,7 @@ $otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "search
 <table class="caracteristiques">
     <tr>
         <th>
-            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $date ?>/?colSorted=NSIREN&sortDirection=<?= ($colSorted !== 'NSIREN') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Numéro de SIREN </a>
+            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $date ?>/?colSorted=N_SIREN&sortDirection=<?= ($colSorted !== 'N_SIREN') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Numéro de SIREN </a>
         </th>
         <th>
             <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $date ?>/?colSorted=Raison_Sociale&sortDirection=<?= ($colSorted !== 'Raison_Sociale') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Raison sociale </a>

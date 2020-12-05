@@ -17,8 +17,8 @@ class Compte extends Model {
         $tableName = self::getTable();
         $transactionTable = Transaction::getTable();
 
-        $stmt = DBConnection::getPDO()->prepare("SELECT idCompte as id, nomCompte as nom, count(t.id) as nombreTransactions, solde 
-            FROM {$tableName} as c JOIN {$transactionTable} AS t ON t.id = idCompte WHERE c.id = ? GROUP BY t.id");
+        $stmt = DBConnection::getPDO()->prepare("SELECT idCompte as id, nomCompte as nom, count(idCompte) as nombreTransactions, solde 
+            FROM {$tableName} as c NATURAL JOIN {$transactionTable} WHERE id = ? GROUP BY idCompte");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute([$profilId]);
         return $stmt->fetchAll();

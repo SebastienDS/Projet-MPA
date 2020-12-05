@@ -29,7 +29,7 @@ class Transaction extends Model {
                 - IFNULL(LEAST(SUM(CASE WHEN moyenPay = 'Visa' THEN MTrans END), 0), 0) AS Visa,
                 - IFNULL(LEAST(SUM(CASE WHEN moyenPay = 'MC' THEN MTrans END), 0), 0) AS Mastercard
             FROM {$table}
-            WHERE datetr >= ? AND datetr <= ? AND id IN (SELECT idcompte FROM {$compteTable} WHERE id = 1)
+            WHERE datetr >= ? AND datetr <= ? AND idCompte IN (SELECT idcompte FROM {$compteTable} WHERE id = 1)
             GROUP BY date 
             ORDER BY datetr");
         $stmt->setFetchMode(PDO::FETCH_NUM);
@@ -50,9 +50,9 @@ class Transaction extends Model {
         }
         $where['id'] = $idCompte;
 
-        $stmt = DBConnection::getPDO()->prepare("SELECT NSIREN as siren, Raison_Sociale as raisonSociale, 
+        $stmt = DBConnection::getPDO()->prepare("SELECT N_SIREN as siren, Raison_Sociale as raisonSociale, 
             datetr as date, count(datetr) as nombreTransactions, 'Euro', moyenPay, sum(Mtrans) as montantTotal 
-            FROM {$table} JOIN {$entrepriseTable} on NSIREN = N_SIREN WHERE id = :id GROUP BY datetr, NSIREN {$queryCondition} ORDER BY {$orderBy} {$orderdirection}");
+            FROM {$table} NATURAL JOIN {$entrepriseTable} WHERE idCompte = :id GROUP BY datetr, N_SIREN {$queryCondition} ORDER BY {$orderBy} {$orderdirection}");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute($where);
         return $stmt->fetchAll();
@@ -73,10 +73,10 @@ class Transaction extends Model {
         $where['siren'] = $siren;
         $where['datetr'] = $date;
 
-        $stmt = DBConnection::getPDO()->prepare("SELECT NSIREN as siren, Raison_Sociale as raisonSociale, 
+        $stmt = DBConnection::getPDO()->prepare("SELECT N_SIREN as siren, Raison_Sociale as raisonSociale, 
             datetr as datetr, 'Euro', moyenPay, Mtrans as montant
-            FROM {$table} JOIN {$entrepriseTable} on NSIREN = N_SIREN WHERE id = :idCompte AND NSIREN = :siren AND 
-            datetr = :datetr GROUP BY datetr, NSIREN {$queryCondition} ORDER BY {$orderBy} {$orderdirection}");
+            FROM {$table} NATURAL JOIN {$entrepriseTable} WHERE idCompte = :idCompte AND N_SIREN = :siren AND 
+            datetr = :datetr GROUP BY datetr, N_SIREN {$queryCondition} ORDER BY {$orderBy} {$orderdirection}");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute($where);
         return $stmt->fetchAll();
