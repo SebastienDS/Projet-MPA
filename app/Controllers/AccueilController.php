@@ -15,7 +15,7 @@ class AccueilController extends Controller {
     }
 
     public function showInfo() {
-        $this->isConnected(['client', 'admin']);
+        $this->isConnected(['client', 'admin', 'productOwner']);
 
         return $this->view('showInfo', [
             'title' => 'Connecté',

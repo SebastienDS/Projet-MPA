@@ -13,13 +13,14 @@ class Compte extends Model {
         return 'Compte';
     }
 
-    public static function getInfos(): array {
+    public static function getInfos(int $profilId): array {
         $tableName = self::getTable();
         $transactionTable = Transaction::getTable();
 
-        $stmt = DBConnection::getPDO()->query("SELECT idCompte as id, nomCompte as nom, count(t.id) as nombreTransactions, solde 
-            FROM {$tableName} JOIN {$transactionTable} AS t ON t.id = idCompte GROUP BY t.id");
+        $stmt = DBConnection::getPDO()->prepare("SELECT idCompte as id, nomCompte as nom, count(t.id) as nombreTransactions, solde 
+            FROM {$tableName} as c JOIN {$transactionTable} AS t ON t.id = idCompte WHERE c.id = ? GROUP BY t.id");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute([$profilId]);
         return $stmt->fetchAll();
     }
 

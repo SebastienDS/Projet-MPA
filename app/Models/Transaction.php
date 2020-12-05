@@ -19,15 +19,17 @@ class Transaction extends Model {
         return $stmt->fetchAll();
     }
 
-    public static function getImpayes(string $dateDebut, string $dateFin): array {
+    public static function getImpayes(string $dateDebut, string $dateFin, int $idClient): array {
         $table = self::getTable();
+        $compteTable = Compte::getTable();
+
         $stmt = DBConnection::getPDO()->prepare("SELECT 
                 CONCAT(MONTHNAME(datetr), ' ', YEAR(datetr)) AS date, 
                 - IFNULL(LEAST(SUM(CASE WHEN moyenPay = 'CB' THEN MTrans END), 0), 0) AS CB,
                 - IFNULL(LEAST(SUM(CASE WHEN moyenPay = 'Visa' THEN MTrans END), 0), 0) AS Visa,
                 - IFNULL(LEAST(SUM(CASE WHEN moyenPay = 'MC' THEN MTrans END), 0), 0) AS Mastercard
-            FROM Transaction
-            WHERE datetr >= ? AND datetr <= ?
+            FROM {$table}
+            WHERE datetr >= ? AND datetr <= ? AND id IN (SELECT idcompte FROM {$compteTable} WHERE id = 1)
             GROUP BY date 
             ORDER BY datetr");
         $stmt->setFetchMode(PDO::FETCH_NUM);

@@ -10,8 +10,6 @@ use Mpdf\Mpdf;
 class DownloadController extends Controller {
 
     public function downloadCompte(string $format, int $id) {
-        $this->isConnected(['client']);
-
         $where = [];
         $_GET = array_filter($_GET);
         if (isset($_GET['searchingBy']) && isset($_GET['search'])) {
@@ -28,8 +26,6 @@ class DownloadController extends Controller {
     }
 
     public function downloadImpayes(string $format) {
-        $this->isConnected(['client']);
-
         return $this->view('downloadImpayes', [
             'title' => "Téléchargement $format",
             'type' => $format,
@@ -41,8 +37,6 @@ class DownloadController extends Controller {
     }
 
     public function downloadTransaction(string $format, int $id, int $siren, string $date) {
-        $this->isConnected(['client']);
-
         $where = [];
         $_GET = array_filter($_GET);
         if (isset($_GET['searchingBy']) && isset($_GET['search'])) {

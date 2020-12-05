@@ -53,7 +53,7 @@ class CompteController extends Controller {
         $compteInfos = Compte::findById($id, ['solde']);
 
         return $this->view('client/detailTransaction', [
-            'title' => 'Detail compte',
+            'title' => 'Detail transaction',
             'style' => [
                 'accueil',
                 'style',

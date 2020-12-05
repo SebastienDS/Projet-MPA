@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Models\Client;
 use App\Models\Admin;
+use App\Models\ProductOwner;
 use App\Models\Profil;
 
 class ConnexionController extends Controller {
@@ -36,13 +37,17 @@ class ConnexionController extends Controller {
         }
         if (Admin::isConnected($username, $password)) {
             $_SESSION['auth'] = 'admin';
-            return header('Location: '. SCRIPT_NAME .'/bank.php/admin?success=1');
+            return header('Location: '. SCRIPT_NAME .'/bank.php/admin');
+        }
+        if (ProductOwner::isConnected($username, $password)) {
+            $_SESSION['auth'] = 'productOwner';
+            return header('Location: '. SCRIPT_NAME .'/bank.php/productOwner');
         }
         return header('Location: '. SCRIPT_NAME .'/bank.php/connexion?error=1');
     }
 
     public function changePassword() {
-        $this->isConnected(['client', 'admin']);
+        $this->isConnected(['client', 'admin', 'productOwner']);
 
         $error = (int)htmlentities($_GET['error'] ?? 0);
 
@@ -58,7 +63,7 @@ class ConnexionController extends Controller {
     }
 
     public function passwordValidation() {
-        $this->isConnected(['client', 'admin']);
+        $this->isConnected(['client', 'admin', 'productOwner']);
 
         $newPassword = htmlentities($_POST['newPassword']);
         $newPasswordConfirm = htmlentities($_POST['newPasswordConfirm']);

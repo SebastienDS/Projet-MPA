@@ -27,7 +27,7 @@ class ClientController extends Controller {
         $this->isConnected(['client']);
 
         $client = Profil::findById($_SESSION['id'], ['nom', 'prenom']);
-        $comptes = Compte::getInfos();
+        $comptes = Compte::getInfos($_SESSION['id']);
 
         return $this->view('client/mesComptes', [
             'title' => 'Mes Comptes',
@@ -48,7 +48,7 @@ class ClientController extends Controller {
         $dateDebut = htmlentities($_GET['dateDebut'] ?? $dates[0]->datetr);
         $dateFin = htmlentities($_GET['dateFin'] ?? end($dates)->datetr);
 
-        $impayes = Transaction::getImpayes($dateDebut, $dateFin);
+        $impayes = Transaction::getImpayes($dateDebut, $dateFin, $_SESSION['id']);
         foreach ($impayes as $key => $row) {
             for ($i = 1; $i < count($row); $i++) {
                 $impayes[$key][$i] = (int)$row[$i];
