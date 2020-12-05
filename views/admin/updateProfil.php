@@ -32,7 +32,10 @@
     </div>
 </form>
 
-<div class="footer-fixed flex-end center-y">
+<div class="footer-fixed space-between center-y">
+    <div class="DL-btns center-x">
+        <a href="<?= SCRIPT_NAME ?>/bank.php/admin/updateProfil/<?= $infos->id ?>/modificationCompte" class="btn">Modifier les comptes</a>
+    </div>
 
     <div class="DL-btns space-around">
         <a href="<?= SCRIPT_NAME ?>/bank.php/admin" class="btn">Annuler</a>

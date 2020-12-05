@@ -35,11 +35,15 @@ $router->get('/client/compte/:id/transaction/:siren/:date', 'App\Controllers\Com
 
 
 $router->get('/admin', 'App\Controllers\AdminController@accueil');
-$router->get('/admin/ajoutCompte', 'App\Controllers\AdminController@ajoutCompte');
-$router->post('/admin/ajoutCompte', 'App\Controllers\AdminController@creationCompte');
-$router->post('/admin/deleteCompte/:id', 'App\Controllers\AdminController@deleteCompte');
-$router->get('/admin/updateCompte/:id', 'App\Controllers\AdminController@updateCompte');
-$router->post('/admin/updateCompte/:id', 'App\Controllers\AdminController@updateProfil');
+$router->get('/admin/ajoutProfil', 'App\Controllers\AdminController@ajoutProfil');
+$router->post('/admin/ajoutProfil', 'App\Controllers\AdminController@creationProfil');
+$router->post('/admin/deleteProfil/:id', 'App\Controllers\AdminController@deleteProfil');
+$router->get('/admin/updateProfil/:id', 'App\Controllers\AdminController@updateProfil');
+$router->post('/admin/updateProfil/:id', 'App\Controllers\AdminController@updateProfilPOST');
+$router->get('/admin/updateProfil/:id/modificationCompte', 'App\Controllers\AdminController@listComptes');
+$router->get('/admin/updateProfil/:id/ajoutCompte', 'App\Controllers\AdminController@ajoutCompte');
+$router->post('/admin/updateProfil/:id/ajoutCompte', 'App\Controllers\AdminController@ajoutComptePOST');
+$router->get('/admin/updateProfil/:idClient/deleteCompte/:idCompte', 'App\Controllers\AdminController@deleteCompte');
 
 
 $router->get('/productOwner', 'App\Controllers\ProductOwnerController@accueil');

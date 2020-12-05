@@ -3,6 +3,7 @@
 $colSorted = $_GET['colSorted'];
 $sortDirection = $_GET['sortDirection'];
 $otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "searchingBy={$_GET['searchingBy']}&search={$_GET['search']}" : '';
+$_GET['idClient'] = $_SESSION['id'];
 ?>
 
 <div class="bandeau center-y flex-end">

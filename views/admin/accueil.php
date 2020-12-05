@@ -9,11 +9,11 @@
 
 <div class="bg-white">
     <div class="center-x center-y p-15">
-        <a href="<?= SCRIPT_NAME ?>/bank.php/admin/ajoutCompte" class="btn">Ajouter un compte</a>
+        <a href="<?= SCRIPT_NAME ?>/bank.php/admin/ajoutProfil" class="btn">Ajouter un profil</a>
     </div>
 
     <?php foreach ($comptes as $compte): ?>
-        <a href="<?= SCRIPT_NAME ?>/bank.php/admin/updateCompte/<?= $compte->id ?>">
+        <a href="<?= SCRIPT_NAME ?>/bank.php/admin/updateProfil/<?= $compte->id ?>">
             <div class="space-between compteItem center-y">
                 <div>
                     <?= $compte->nom ?> <?= $compte->prenom ?>
@@ -40,7 +40,7 @@
         </p>
 
         <div class="space-around w-70">
-            <form id="submitBtn" action="<?= SCRIPT_NAME ?>/bank.php/admin/deleteCompte/" method="POST">
+            <form id="submitBtn" action="<?= SCRIPT_NAME ?>/bank.php/admin/deleteProfil/" method="POST">
                 <button type="submit" class="btn-success">Oui</button>
             </form>
             <button class="btn-failure" id="closeBtn">Non</button>

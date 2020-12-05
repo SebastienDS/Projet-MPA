@@ -4,12 +4,15 @@
 namespace App\Controllers;
 
 
+use App\Models\Profil;
 use App\Models\Transaction;
 use Mpdf\Mpdf;
 
 class DownloadController extends Controller {
 
-    public function downloadCompte(string $format, int $id) {
+    public function downloadCompte(string $format, int $idCompte) {
+        $idClient = (int)$_GET['idClient'];
+
         $where = [];
         $_GET = array_filter($_GET);
         if (isset($_GET['searchingBy']) && isset($_GET['search'])) {
@@ -19,10 +22,15 @@ class DownloadController extends Controller {
         if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'datetr'; }
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
-        $data = Transaction::getInfos($id, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        $data = Transaction::getInfos($idCompte, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        $params = [];
+        if ($format === 'pdf') {
+            $client = Profil::findById($idClient, ['prenom', 'nom']);
+            $params[] = "Exportation Compte n°$idCompte de {$client->prenom} {$client->nom}";
+        }
 
         $download = 'download'. strtoupper($format);
-        $this->$download($data);
+        $this->$download($data, ...$params);
     }
 
     public function downloadImpayes(string $format) {
@@ -52,7 +60,7 @@ class DownloadController extends Controller {
         $this->$download($data);
     }
 
-    public function downloadPDF(array $data) {
+    public function downloadPDF(array $data, string $title) {
         $content = '<table><tr>';
         foreach (array_keys((array)$data[0]) as $key) {
             $content .= "<th> $key </th>";
@@ -69,6 +77,9 @@ class DownloadController extends Controller {
         $content .= '</table>';
 
         $pdf = new Mpdf();
+        $pdf->WriteHTML(file_get_contents('public/css/download.css'), 1);
+        $pdf->WriteHTML("<h1 class='title'> $title </h1>");
+        $pdf->WriteHTML("<p class='title'>". date("F j, Y, g:i a") ."<p/>");
         $pdf->WriteHTML($content);
         $pdf->Output();
     }
