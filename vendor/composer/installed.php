@@ -6,19 +6,19 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'da72eba09349c714ce6ffe6105d4cfc58a938d31',
+    'reference' => '832ebf83874d783a0ddb00e46b78ba79af7098f0',
     'name' => 'natso/projet-mpa',
   ),
   'versions' => 
   array (
     'mpdf/mpdf' => 
     array (
-      'pretty_version' => 'v8.0.7',
-      'version' => '8.0.7.0',
+      'pretty_version' => 'v8.0.0',
+      'version' => '8.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7daf07f15334ed59a276bd52131dcca48794cdbd',
+      'reference' => 'c13ebc0fd5cc0613dfb1fd37d55a67859b92cf0c',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -40,7 +40,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'da72eba09349c714ce6ffe6105d4cfc58a938d31',
+      'reference' => '832ebf83874d783a0ddb00e46b78ba79af7098f0',
     ),
     'paragonie/random_compat' => 
     array (

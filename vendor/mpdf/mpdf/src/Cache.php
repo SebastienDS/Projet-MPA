@@ -70,11 +70,9 @@ class Cache
 
 	public function write($filename, $data)
 	{
-		$tempFile = tempnam($this->basePath, 'cache_tmp_');
-		file_put_contents($tempFile, $data);
-
 		$path = $this->getFilePath($filename);
-		rename($tempFile, $path);
+
+		file_put_contents($path, $data);
 
 		return $path;
 	}

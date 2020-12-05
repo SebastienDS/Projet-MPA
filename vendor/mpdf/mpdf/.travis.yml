@@ -5,12 +5,11 @@ dist: xenial
 group: edge
 
 php:
-  - 7.3
-  - 7.1
   - 5.6
-  - 7.4
-  - 7.2
   - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
   - nightly
 
 matrix:
@@ -38,11 +37,11 @@ install:
 script:
   - |
     if [[ "$LINT" == "1" ]]; then
-      composer cs
+      ./vendor/bin/phpcs -v --report-width=160 --standard=ruleset.xml --severity=1 --warning-severity=0 --extensions=php src utils tests
     elif [[ "$COVERAGE" == "1" ]]; then
-      composer coverage
+      vendor/bin/phpunit --coverage-text
     else
-      composer test
+      vendor/bin/phpunit
     fi
 
 notifications:
