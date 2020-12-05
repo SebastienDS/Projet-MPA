@@ -10,6 +10,7 @@ use App\Models\Profil;
 class ConnexionController extends Controller {
 
     public function connexion() {
+        $this->redirectIfLogged();
         $error = (int)htmlentities($_GET['error'] ?? 0);
 
         return $this->view('connexion', [
@@ -80,5 +81,11 @@ class ConnexionController extends Controller {
     public function logout() {
         session_destroy();
         return header('Location: '. SCRIPT_NAME .'/bank.php');
+    }
+
+    public function redirectIfLogged() {
+        if (isset($_SESSION['auth'])) {
+            return header('Location: '. SCRIPT_NAME .'/bank.php/'. $_SESSION['auth']);
+        }
     }
 }

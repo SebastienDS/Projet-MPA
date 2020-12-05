@@ -1,6 +1,6 @@
 
 <div class="space-between column max-height">
-    <?php require_once('views/include/header.php') ?>
+    <?php require_once('views/include/headerAccueil.php') ?>
 
 
     <div class="slogan center-x center-y">
