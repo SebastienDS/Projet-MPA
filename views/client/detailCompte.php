@@ -78,13 +78,13 @@ $otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "search
     </form>
 
     <div class="DL-btns space-around">
-        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/pdf/compte/<?= $numeroCompte ?>?<?= http_build_query($_GET); ?>" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/compte/<?= $numeroCompte ?>?<?= http_build_query($_GET); ?>" method="POST">
             <button class="btn">PDF</button>
         </form>
-        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/xls/compte/<?= $numeroCompte ?>?<?= http_build_query($_GET); ?>" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/xls/compte/<?= $numeroCompte ?>?<?= http_build_query($_GET); ?>" method="POST">
             <button class="btn">XLS</button>
         </form>
-        <form action="<?= SCRIPT_NAME ?>/bank.php/client/download/csv/compte/<?= $numeroCompte ?>?<?= http_build_query($_GET); ?>" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/csv/compte/<?= $numeroCompte ?>?<?= http_build_query($_GET); ?>" method="POST">
             <button class="btn">CSV</button>
         </form>
     </div>
