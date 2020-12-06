@@ -60,7 +60,7 @@ class CompteController extends Controller {
 
         $page = max($_GET['page'] ?? 1, 0);
 
-        $totalPages = ceil(Transaction::getInfosCount($id) / self::$rowPerPages);
+        $totalPages = ceil(Transaction::getTransactionsCount($id, $siren, $date) / self::$rowPerPages);
         if ($page > $totalPages) { $page = $totalPages; }
 
         $transactions = Transaction::getTransactions($id, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);

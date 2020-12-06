@@ -68,7 +68,7 @@ class ProductOwnerController extends Controller {
 
         $page = max($_GET['page'] ?? 1, 0);
 
-        $totalPages = ceil(Transaction::getInfosCount($idClient) / self::$rowPerPages);
+        $totalPages = ceil(Transaction::getInfosCount($idCompte) / self::$rowPerPages);
         if ($page > $totalPages) { $page = $totalPages; }
 
         $transactions = Transaction::getInfos($idCompte, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
@@ -104,7 +104,7 @@ class ProductOwnerController extends Controller {
 
         $page = max($_GET['page'] ?? 1, 0);
 
-        $totalPages = ceil(Transaction::getInfosCount($idClient) / self::$rowPerPages);
+        $totalPages = ceil(Transaction::getTransactionsCount($idClient, $siren, $date) / self::$rowPerPages);
         if ($page > $totalPages) { $page = $totalPages; }
 
         $transactions = Transaction::getTransactions($idCompte, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
