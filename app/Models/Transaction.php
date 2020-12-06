@@ -52,6 +52,7 @@ class Transaction extends Model {
 
         $queryLimit = '';
         if ($page !== NULL) {
+            $page = max($page, 0);
             $queryLimit .= 'LIMIT '. $page * $rowPerPages;
             if ($rowPerPages !== NULL) {
                 $queryLimit .= ", $rowPerPages";
@@ -89,6 +90,7 @@ class Transaction extends Model {
 
         $queryLimit = '';
         if ($page !== NULL) {
+            $page = max($page, 0);
             $queryLimit .= 'LIMIT '. $page * $rowPerPages;
             if ($rowPerPages !== NULL) {
                 $queryLimit .= ", $rowPerPages";
