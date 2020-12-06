@@ -9,6 +9,8 @@ use App\Models\Transaction;
 
 class CompteController extends Controller {
 
+    private static $rowPerPages = 10;
+
     public function detail(int $id) {
         $this->isConnected(['client']);
 
@@ -21,7 +23,12 @@ class CompteController extends Controller {
         if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'datetr'; }
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
-        $transactions = Transaction::getInfos($id, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        $page = max($_GET['page'] ?? 1, 0);
+
+        $totalPages = ceil(Transaction::getInfosCount($id) / self::$rowPerPages);
+        if ($page > $totalPages) { $page = $totalPages; }
+
+        $transactions = Transaction::getInfos($id, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
         $compteInfos = Compte::findById($id, ['solde']);
 
         return $this->view('client/detailCompte', [
@@ -33,7 +40,9 @@ class CompteController extends Controller {
             ],
             'numeroCompte' => $id,
             'transactions' => $transactions,
-            'compteInfos' => $compteInfos
+            'compteInfos' => $compteInfos,
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 
@@ -49,7 +58,12 @@ class CompteController extends Controller {
         if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'datetr'; }
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
-        $transactions = Transaction::getTransactions($id, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        $page = max($_GET['page'] ?? 1, 0);
+
+        $totalPages = ceil(Transaction::getInfosCount($id) / self::$rowPerPages);
+        if ($page > $totalPages) { $page = $totalPages; }
+
+        $transactions = Transaction::getTransactions($id, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
         $compteInfos = Compte::findById($id, ['solde']);
 
         return $this->view('client/detailTransaction', [
@@ -63,7 +77,9 @@ class CompteController extends Controller {
             'transactions' => $transactions,
             'compteInfos' => $compteInfos,
             'siren' => $siren,
-            'date' => $date
+            'date' => $date,
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 }

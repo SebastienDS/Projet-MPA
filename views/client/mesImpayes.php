@@ -23,18 +23,17 @@
 <div class="footer-fixed flex-end center-y">
 
     <div class="DL-btns space-around">
-        <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/impayes" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">
             <button class="btn">PDF</button>
         </form>
-        <form action="<?= SCRIPT_NAME ?>/bank.php/download/xls/impayes" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/xls/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">
             <button class="btn">XLS</button>
         </form>
-        <form action="<?= SCRIPT_NAME ?>/bank.php/download/csv/impayes" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/csv/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">
             <button class="btn">CSV</button>
         </form>
     </div>
 </div>
-
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -56,5 +55,6 @@
 
         const chart = new google.charts.Bar(document.getElementById('graphique'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
+
     });
 </script>

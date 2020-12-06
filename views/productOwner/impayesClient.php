@@ -23,13 +23,13 @@
 <div class="footer-fixed flex-end center-y">
 
     <div class="DL-btns space-around">
-        <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/impayes" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">
             <button class="btn">PDF</button>
         </form>
-        <form action="<?= SCRIPT_NAME ?>/bank.php/download/xls/impayes" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/xls/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">
             <button class="btn">XLS</button>
         </form>
-        <form action="<?= SCRIPT_NAME ?>/bank.php/download/csv/impayes" method="POST">
+        <form action="<?= SCRIPT_NAME ?>/bank.php/download/csv/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">
             <button class="btn">CSV</button>
         </form>
     </div>

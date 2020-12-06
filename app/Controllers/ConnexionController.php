@@ -28,19 +28,34 @@ class ConnexionController extends Controller {
     public function validConnexion() {
         $username = htmlentities($_POST['username']);
         $password = htmlentities($_POST['password']);
+        $stayConnected = htmlentities($_POST['stayConnected']);
+
+        if (isset($_COOKIE['connected'])) {
+            $_SESSION = explode(';', $_COOKIE['connected']);
+        }
+
         $_SESSION['username'] = $username;
 
         if (Client::isConnected($username, $password)) {
             $_SESSION['auth'] = 'client';
             $_SESSION['id'] = Profil::getIdWhere(['pseudo' => $username, 'pwd' => sha1($password)]);
+            if ($stayConnected) {
+                $this->setCookie('connected', 86400, $_SESSION);    // 1 day
+            }
             return header('Location: '. SCRIPT_NAME .'/bank.php/client?success=1');
         }
         if (Admin::isConnected($username, $password)) {
             $_SESSION['auth'] = 'admin';
+            if ($stayConnected) {
+                $this->setCookie('connected', 43200, $_SESSION);    // 12 hours
+            }
             return header('Location: '. SCRIPT_NAME .'/bank.php/admin');
         }
         if (ProductOwner::isConnected($username, $password)) {
             $_SESSION['auth'] = 'productOwner';
+            if ($stayConnected) {
+                $this->setCookie('connected', 86400, $_SESSION);    // 1 day
+            }
             return header('Location: '. SCRIPT_NAME .'/bank.php/productOwner');
         }
         return header('Location: '. SCRIPT_NAME .'/bank.php/connexion?error=1');
@@ -85,6 +100,7 @@ class ConnexionController extends Controller {
 
     public function logout() {
         session_destroy();
+        $this->setCookie('connected', -1);
         return header('Location: '. SCRIPT_NAME .'/bank.php');
     }
 
@@ -92,5 +108,9 @@ class ConnexionController extends Controller {
         if (isset($_SESSION['auth'])) {
             return header('Location: '. SCRIPT_NAME .'/bank.php/'. $_SESSION['auth']);
         }
+    }
+
+    public function setCookie(string $name, int $duration, array $params=[]) {
+        setCookie($name, implode(';', $params), time() + $duration);
     }
 }

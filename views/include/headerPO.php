@@ -3,6 +3,12 @@
         <img src="<?= SCRIPT_NAME ?>/public/img/logo.png" width="200" height="200">
     </a>
 
+    <div class="max-height grow center-x">
+        <a href="<?= SCRIPT_NAME ?>/bank.php/productOwner/impayes" class="headerBtn center-x center-y">
+            Voir les Impayés
+        </a>
+    </div>
+
     <div>
         <ul id="menu-deroulant">
             <li>

@@ -72,11 +72,11 @@ $_GET['idClient'] = $idClient;
         <?= $compteInfos->solde ?>
     </div>
 
-    <form class="center-y">
-        <button type='submit' class="arrow left" name="page" value="-"></button>
-        <span class="p-15">1 / 42</span>
-        <button type='submit' class="arrow right" name="page" value="+"></button>
-    </form>
+    <div>
+        <a class="arrow left" href="?page=<?= $page - 1 ?>"></a>
+        <span class="p-15"><?= $page ?> / <?= $totalPages ?></span>
+        <a class="arrow right" href="?page=<?= $page + 1 ?>"></a>
+    </div>
 
     <div class="DL-btns space-around">
         <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/compte/<?= $numeroCompte ?>?<?= http_build_query($_GET); ?>" method="POST">

@@ -5,10 +5,14 @@ namespace App\Controllers;
 
 
 use App\Models\Compte;
+use App\Models\Entreprise;
 use App\Models\Profil;
 use App\Models\Transaction;
 
 class ProductOwnerController extends Controller {
+
+    private static $rowPerPages = 10;
+
 
     public function accueil() {
         $this->isConnected(['productOwner']);
@@ -62,7 +66,12 @@ class ProductOwnerController extends Controller {
         if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'datetr'; }
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
-        $transactions = Transaction::getInfos($idCompte, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        $page = max($_GET['page'] ?? 1, 0);
+
+        $totalPages = ceil(Transaction::getInfosCount($idClient) / self::$rowPerPages);
+        if ($page > $totalPages) { $page = $totalPages; }
+
+        $transactions = Transaction::getInfos($idCompte, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
         $compteInfos = Compte::findById($idCompte, ['solde']);
 
         return $this->view('productOwner/detailCompte', [
@@ -75,7 +84,9 @@ class ProductOwnerController extends Controller {
             'idClient' => $idClient,
             'numeroCompte' => $idCompte,
             'transactions' => $transactions,
-            'compteInfos' => $compteInfos
+            'compteInfos' => $compteInfos,
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 
@@ -91,7 +102,12 @@ class ProductOwnerController extends Controller {
         if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'datetr'; }
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
-        $transactions = Transaction::getTransactions($idCompte, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        $page = max($_GET['page'] ?? 1, 0);
+
+        $totalPages = ceil(Transaction::getInfosCount($idClient) / self::$rowPerPages);
+        if ($page > $totalPages) { $page = $totalPages; }
+
+        $transactions = Transaction::getTransactions($idCompte, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
         $compteInfos = Compte::findById($idCompte, ['solde']);
 
         return $this->view('productOwner/detailTransaction', [
@@ -106,11 +122,13 @@ class ProductOwnerController extends Controller {
             'transactions' => $transactions,
             'compteInfos' => $compteInfos,
             'siren' => $siren,
-            'date' => $date
+            'date' => $date,
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 
-    public function impayes(int $idClient) {
+    public function impayesClient(int $idClient) {
         $this->isConnected(['productOwner']);
 
         $dates = Transaction::getDates();
@@ -136,6 +154,31 @@ class ProductOwnerController extends Controller {
             'idClient' => $idClient,
             'dateDebut' => $dateDebut,
             'dateFin' => $dateFin,
+            'impayes' => $impayes
+        ]);
+    }
+
+    public function impayes() {
+        $this->isConnected(['productOwner']);
+
+        $where = [];
+        $_GET = array_filter($_GET);
+        if (isset($_GET['searchingBy']) && isset($_GET['search'])) {
+            $where[$_GET['searchingBy']] = $_GET['search'];
+        }
+
+        if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'N_SIREN'; }
+        if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'ASC'; }
+
+        $impayes = Entreprise::getImpayes($_GET['colSorted'], $_GET['sortDirection'], $where);
+
+        return $this->view('productOwner/impayes', [
+            'title' => 'impayés',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes'
+            ],
             'impayes' => $impayes
         ]);
     }

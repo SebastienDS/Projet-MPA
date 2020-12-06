@@ -47,17 +47,18 @@ $router->get('/admin/updateProfil/:idClient/deleteCompte/:idCompte', 'App\Contro
 
 
 $router->get('/productOwner', 'App\Controllers\ProductOwnerController@accueil');
+$router->get('/productOwner/impayes', 'App\Controllers\ProductOwnerController@impayes');
 $router->get('/productOwner/client/:id', 'App\Controllers\ProductOwnerController@client');
 $router->get('/productOwner/client/:id/compte/:idCompte', 'App\Controllers\ProductOwnerController@compte');
-$router->get('/productOwner/client/:id/impayes', 'App\Controllers\ProductOwnerController@impayes');
+$router->get('/productOwner/client/:id/impayes', 'App\Controllers\ProductOwnerController@impayesClient');
 $router->get('/productOwner/client/:idClient/compte/:idCompte/transaction/:siren/:date', 'App\Controllers\ProductOwnerController@transactions');
 
 
 
 $router->post('/download/:format/compte/:id', 'App\Controllers\DownloadController@downloadCompte');
-$router->post('/download/:format/impayes', 'App\Controllers\DownloadController@downloadImpayes');
+$router->post('/download/:format/impayes/client/:idClient', 'App\Controllers\DownloadController@downloadImpayesClient');
 $router->post('/download/:format/compte/:id/transaction/:siren/:date', 'App\Controllers\DownloadController@downloadTransaction');
-
+$router->post('/download/:format/impayes', 'App\Controllers\DownloadController@downloadImpayesPO');
 
 
 

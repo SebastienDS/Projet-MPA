@@ -56,7 +56,6 @@ class ClientController extends Controller {
         }
         array_unshift($impayes, ['Mois', 'Impayés CB', 'Impayés Visa', 'Impayés Mastercard']);
 
-
         return $this->view('client/mesImpayes', [
             'title' => 'Mes impayés',
             'style' => [
@@ -64,6 +63,7 @@ class ClientController extends Controller {
                 'style',
                 'comptes'
             ],
+            'idClient' => $_SESSION['id'],
             'dateDebut' => $dateDebut,
             'dateFin' => $dateFin,
             'impayes' => $impayes

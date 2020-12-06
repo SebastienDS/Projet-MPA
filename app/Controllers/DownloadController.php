@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 
+use App\Models\Entreprise;
 use App\Models\Profil;
 use App\Models\Transaction;
 use Mpdf\Mpdf;
@@ -23,6 +24,8 @@ class DownloadController extends Controller {
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
         $data = Transaction::getInfos($idCompte, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        array_unshift($data, ['Numéro de SIREN', 'Raison Sociale', 'Date traitement', 'Nombre de Transactions', 'Devise', 'Moyen de paiement', 'Montant']);
+
         $params = [];
         if ($format === 'pdf') {
             $client = Profil::findById($idClient, ['prenom', 'nom']);
@@ -33,18 +36,24 @@ class DownloadController extends Controller {
         $this->$download($data, ...$params);
     }
 
-    public function downloadImpayes(string $format) {
-        return $this->view('downloadImpayes', [
-            'title' => "Téléchargement $format",
-            'type' => $format,
-            'style' => [
-                'accueil',
-                'style'
-            ]
-        ]);
+    public function downloadImpayesClient(string $format, int $idClient) {
+        $dateDebut = htmlentities($_GET['dateDebut']);
+        $dateFin = htmlentities($_GET['dateFin']);
+
+        $impayes = Transaction::getImpayes($dateDebut, $dateFin, $idClient);
+        array_unshift($impayes, ['Mois', 'Impayés CB', 'Impayés Visa', 'Impayés Mastercard']);
+
+        $params = [];
+        if ($format === 'pdf') {
+            $client = Profil::findById($idClient, ['prenom', 'nom']);
+            $params[] = "Exportation des impayés de {$client->prenom} {$client->nom} entre le {$dateDebut} et le {$dateFin}";
+        }
+
+        $download = 'download'. strtoupper($format);
+        $this->$download($impayes, ...$params);
     }
 
-    public function downloadTransaction(string $format, int $id, int $siren, string $date) {
+    public function downloadTransaction(string $format, int $idCompte, int $siren, string $date) {
         $where = [];
         $_GET = array_filter($_GET);
         if (isset($_GET['searchingBy']) && isset($_GET['search'])) {
@@ -54,20 +63,49 @@ class DownloadController extends Controller {
         if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'datetr'; }
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
-        $data = Transaction::getTransactions($id, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        $transactions = Transaction::getTransactions($idCompte, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where);
+        array_unshift($transactions, ['Numéro de SIREN', 'Raison Sociale', 'Date traitement', 'Devise', 'Moyen de paiement', 'Montant']);
+
+        $params = [];
+        if ($format === 'pdf') {
+            $params[] = "Exportation des Transactions du compte n°$idCompte";
+        }
 
         $download = 'download'. strtoupper($format);
-        $this->$download($data);
+        $this->$download($transactions, ...$params);
     }
+
+    public function downloadImpayesPO(string $format) {
+        $where = [];
+        $_GET = array_filter($_GET);
+        if (isset($_GET['searchingBy']) && isset($_GET['search'])) {
+            $where[$_GET['searchingBy']] = $_GET['search'];
+        }
+
+        if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'N_SIREN'; }
+        if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'ASC'; }
+
+        $impayes = Entreprise::getImpayes($_GET['colSorted'], $_GET['sortDirection'], $where);
+        array_unshift($impayes, ['Numéro de SIREN', 'Raison Sociale', 'Impayés']);
+
+        $params = [];
+        if ($format === 'pdf') {
+            $params[] = "Exportation des impayés";
+        }
+
+        $download = 'download'. strtoupper($format);
+        $this->$download($impayes, ...$params);
+    }
+
 
     public function downloadPDF(array $data, string $title) {
         $content = '<table><tr>';
-        foreach (array_keys((array)$data[0]) as $key) {
+        foreach ((array)$data[0] as $key) {
             $content .= "<th> $key </th>";
         }
         $content .= "</tr>";
 
-        foreach ($data as $row) {
+        foreach (array_slice($data, 1) as $row) {
             $content .= '<tr>';
             foreach ($row as $value) {
                 $content .= "<td> {$value} </td>";
@@ -90,8 +128,6 @@ class DownloadController extends Controller {
         header("Content-Disposition: attachment; filename=$filename");
 
         $output = fopen('php://output', 'w');
-        fputcsv($output, array_keys((array)$data[0]));
-
         foreach ($data as $row) {
             fputcsv($output, (array)$row);
         }
@@ -104,8 +140,6 @@ class DownloadController extends Controller {
         header("Content-Disposition: attachment; filename=$filename");
 
         $output = fopen('php://output', 'w');
-        fputcsv($output, array_keys((array)$data[0]));
-
         foreach ($data as $row) {
             fputcsv($output, (array)$row);
         }
