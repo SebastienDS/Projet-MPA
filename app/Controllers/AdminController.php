@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 
+use App\Models\Client;
 use App\Models\Compte;
 use App\Models\Profil;
 
@@ -50,6 +51,7 @@ class AdminController extends Controller {
         $infos = array_filter($_POST);
         if (count($infos) !== count($_POST)) return header('Location: '. SCRIPT_NAME .'/bank.php/admin/ajoutProfil');
         $id = Profil::create($infos['nom'], $infos['prenom'], $infos['password']);
+        Client::create($id);
         return header('Location: '. SCRIPT_NAME ."/bank.php/admin/updateProfil/{$id}");
     }
 

@@ -22,4 +22,11 @@ class Client extends Model {
         $stmt->execute([$username, sha1($password)]);
         return $stmt->fetchColumn();
     }
+
+    public static function create(int $id) {
+        $table = static::getTable();
+
+        $stmt = DBConnection::getPDO()->prepare("INSERT INTO {$table} (id) VALUES (?)");
+        $stmt->execute([$id]);
+    }
 }
