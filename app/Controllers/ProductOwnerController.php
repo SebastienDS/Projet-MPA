@@ -170,7 +170,12 @@ class ProductOwnerController extends Controller {
         if (!isset($_GET['colSorted'])) { $_GET['colSorted'] = 'N_SIREN'; }
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'ASC'; }
 
-        $impayes = Entreprise::getImpayes($_GET['colSorted'], $_GET['sortDirection'], $where);
+        $page = max($_GET['page'] ?? 1, 0);
+
+        $totalPages = ceil(Entreprise::getImpayesCount() / self::$rowPerPages);
+        if ($page > $totalPages) { $page = $totalPages; }
+
+        $impayes = Entreprise::getImpayes($_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
 
         return $this->view('productOwner/impayes', [
             'title' => 'impayés',
@@ -179,7 +184,9 @@ class ProductOwnerController extends Controller {
                 'style',
                 'comptes'
             ],
-            'impayes' => $impayes
+            'impayes' => $impayes,
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 }
