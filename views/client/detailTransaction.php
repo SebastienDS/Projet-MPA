@@ -67,10 +67,16 @@ $_GET['idClient'] = $_SESSION['id'];
         <?= $compteInfos->solde ?>
     </div>
 
-    <div>
-        <a class="arrow left" href="?page=<?= $page - 1 ?>"></a>
-        <span class="p-15"><?= $page ?> / <?= $totalPages ?></span>
-        <a class="arrow right" href="?page=<?= $page + 1 ?>"></a>
+    <div class="max-height column space-around center-y">
+        <div>
+            <?= $displayedResults ?> résultat<?= $displayedResults > 1 ? 's' : '' ?> affiché<?= $displayedResults > 1 ? 's' : '' ?> / <?= $resultsTotal ?>
+        </div>
+
+        <div>
+            <a class="arrow left" href="?page=<?= $page - 1 ?>"></a>
+            <span class="p-15"><?= $page ?> / <?= $totalPages ?></span>
+            <a class="arrow right" href="?page=<?= $page + 1 ?>"></a>
+        </div>
     </div>
 
     <div class="DL-btns space-around">

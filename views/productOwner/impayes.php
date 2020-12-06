@@ -46,12 +46,17 @@ $otherParams = (isset($_GET['searchingBy']) && isset($_GET['search'])) ? "search
 <div class="footer-fixed space-between center-y">
     <div></div>
 
-    <div>
-        <a class="arrow left" href="?page=<?= $page - 1 ?>"></a>
-        <span class="p-15"><?= $page ?> / <?= $totalPages ?></span>
-        <a class="arrow right" href="?page=<?= $page + 1 ?>"></a>
-    </div>
+    <div class="max-height column space-around center-y">
+        <div>
+            <?= $displayedResults ?> résultat<?= $displayedResults > 1 ? 's' : '' ?> affiché<?= $displayedResults > 1 ? 's' : '' ?> / <?= $resultsTotal ?>
+        </div>
 
+        <div>
+            <a class="arrow left" href="?page=<?= $page - 1 ?>"></a>
+            <span class="p-15"><?= $page ?> / <?= $totalPages ?></span>
+            <a class="arrow right" href="?page=<?= $page + 1 ?>"></a>
+        </div>
+    </div>
     <div class="DL-btns space-around">
         <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/impayes?<?= http_build_query($_GET); ?>" method="POST">
             <button class="btn">PDF</button>

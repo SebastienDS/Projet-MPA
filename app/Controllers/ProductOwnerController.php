@@ -68,7 +68,8 @@ class ProductOwnerController extends Controller {
 
         $page = max($_GET['page'] ?? 1, 0);
 
-        $totalPages = ceil(Transaction::getInfosCount($idCompte) / self::$rowPerPages);
+        $resultsTotal = Transaction::getInfosCount($idCompte);
+        $totalPages = ceil($resultsTotal / self::$rowPerPages);
         if ($page > $totalPages) { $page = $totalPages; }
 
         $transactions = Transaction::getInfos($idCompte, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
@@ -86,7 +87,9 @@ class ProductOwnerController extends Controller {
             'transactions' => $transactions,
             'compteInfos' => $compteInfos,
             'page' => $page,
-            'totalPages' => $totalPages
+            'totalPages' => $totalPages,
+            'displayedResults' => count($transactions),
+            'resultsTotal' => $resultsTotal
         ]);
     }
 
@@ -104,7 +107,8 @@ class ProductOwnerController extends Controller {
 
         $page = max($_GET['page'] ?? 1, 0);
 
-        $totalPages = ceil(Transaction::getTransactionsCount($idClient, $siren, $date) / self::$rowPerPages);
+        $resultsTotal = Transaction::getTransactionsCount($idClient, $siren, $date);
+        $totalPages = ceil($resultsTotal / self::$rowPerPages);
         if ($page > $totalPages) { $page = $totalPages; }
 
         $transactions = Transaction::getTransactions($idCompte, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
@@ -124,7 +128,9 @@ class ProductOwnerController extends Controller {
             'siren' => $siren,
             'date' => $date,
             'page' => $page,
-            'totalPages' => $totalPages
+            'totalPages' => $totalPages,
+            'displayedResults' => count($transactions),
+            'resultsTotal' => $resultsTotal
         ]);
     }
 
@@ -172,7 +178,8 @@ class ProductOwnerController extends Controller {
 
         $page = max($_GET['page'] ?? 1, 0);
 
-        $totalPages = ceil(Entreprise::getImpayesCount() / self::$rowPerPages);
+        $resultsTotal = Entreprise::getImpayesCount();
+        $totalPages = ceil($resultsTotal / self::$rowPerPages);
         if ($page > $totalPages) { $page = $totalPages; }
 
         $impayes = Entreprise::getImpayes($_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
@@ -186,7 +193,9 @@ class ProductOwnerController extends Controller {
             ],
             'impayes' => $impayes,
             'page' => $page,
-            'totalPages' => $totalPages
+            'totalPages' => $totalPages,
+            'displayedResults' => count($impayes),
+            'resultsTotal' => $resultsTotal
         ]);
     }
 }

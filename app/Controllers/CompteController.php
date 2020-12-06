@@ -25,7 +25,8 @@ class CompteController extends Controller {
 
         $page = max($_GET['page'] ?? 1, 0);
 
-        $totalPages = ceil(Transaction::getInfosCount($id) / self::$rowPerPages);
+        $resultsTotal = Transaction::getInfosCount($id);
+        $totalPages = ceil($resultsTotal / self::$rowPerPages);
         if ($page > $totalPages) { $page = $totalPages; }
 
         $transactions = Transaction::getInfos($id, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
@@ -42,7 +43,9 @@ class CompteController extends Controller {
             'transactions' => $transactions,
             'compteInfos' => $compteInfos,
             'page' => $page,
-            'totalPages' => $totalPages
+            'totalPages' => $totalPages,
+            'displayedResults' => count($transactions),
+            'resultsTotal' => $resultsTotal
         ]);
     }
 
@@ -60,7 +63,8 @@ class CompteController extends Controller {
 
         $page = max($_GET['page'] ?? 1, 0);
 
-        $totalPages = ceil(Transaction::getTransactionsCount($id, $siren, $date) / self::$rowPerPages);
+        $resultsTotal = Transaction::getTransactionsCount($id, $siren, $date);
+        $totalPages = ceil($resultsTotal / self::$rowPerPages);
         if ($page > $totalPages) { $page = $totalPages; }
 
         $transactions = Transaction::getTransactions($id, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where, $page - 1, self::$rowPerPages);
@@ -79,7 +83,9 @@ class CompteController extends Controller {
             'siren' => $siren,
             'date' => $date,
             'page' => $page,
-            'totalPages' => $totalPages
+            'totalPages' => $totalPages,
+            'displayedResults' => count($transactions),
+            'resultsTotal' => $resultsTotal
         ]);
     }
 }
