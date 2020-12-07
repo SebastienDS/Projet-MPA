@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 
+use App\Models\Client;
 use App\Models\Compte;
 use App\Models\Entreprise;
 use App\Models\Profil;
@@ -21,7 +22,7 @@ class ProductOwnerController extends Controller {
         if (isset($_GET['search']) && Profil::exist($_GET['search'])) {
             $comptes = [Profil::findById($_GET['search'], ['id', 'nom', 'prenom'])];
         } else {
-            $comptes = Profil::getColumns(['id', 'nom', 'prenom']);
+            $comptes = Client::getColumns(['id', 'nom', 'prenom']);
         }
 
         return $this->view('productOwner/accueil', [

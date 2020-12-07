@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use Database\DBConnection;
+use PDO;
 
 class Client extends Model {
 
@@ -28,5 +29,15 @@ class Client extends Model {
 
         $stmt = DBConnection::getPDO()->prepare("INSERT INTO {$table} (id) VALUES (?)");
         $stmt->execute([$id]);
+    }
+
+    public static function getColumns(array $infosRequired) {
+        $table = static::getTable();
+        $profilTable = Profil::getTable();
+
+        $columns = implode(', ', $infosRequired);
+        $stmt = DBConnection::getPDO()->query("SELECT {$columns} FROM {$table} NATURAL JOIN {$profilTable}");
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $stmt->fetchAll();
     }
 }
