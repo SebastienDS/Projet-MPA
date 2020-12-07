@@ -118,4 +118,13 @@ class Transaction extends Model {
         $stmt->execute([$idCompte, $siren, $date]);
         return $stmt->rowCount();
     }
+
+    public static function getTransactionsPerMonth(int $idClient): array {
+        $table = static::getTable();
+        $compteTable = Compte::getTable();
+
+        $stmt = DBConnection::getPDO()->prepare("select datetr, sum(MTrans) as montant from {$table} natural join {$compteTable} where id = ? group by datetr");
+        $stmt->execute([$idClient]);
+        return $stmt->fetchAll();
+    }
 }

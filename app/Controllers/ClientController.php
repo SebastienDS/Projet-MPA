@@ -69,4 +69,25 @@ class ClientController extends Controller {
             'impayes' => $impayes
         ]);
     }
+
+    public function tresorerie() {
+        $this->isConnected(['client']);
+
+        $dates = Transaction::getDates();
+        $dateDebut = htmlentities($_GET['dateDebut'] ?? $dates[0]->datetr);
+        $dateFin = htmlentities($_GET['dateFin'] ?? end($dates)->datetr);
+
+
+        return $this->view('client/tresorerie', [
+            'title' => 'Tresorerie',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes'
+            ],
+            'idClient' => $_SESSION['id'],
+            'dateDebut' => $dateDebut,
+            'dateFin' => $dateFin,
+        ]);
+    }
 }

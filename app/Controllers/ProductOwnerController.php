@@ -198,4 +198,25 @@ class ProductOwnerController extends Controller {
             'resultsTotal' => $resultsTotal
         ]);
     }
+
+    public function tresorerieClient(int $idClient) {
+        $this->isConnected(['productOwner']);
+
+        $dates = Transaction::getDates();
+        $dateDebut = htmlentities($_GET['dateDebut'] ?? $dates[0]->datetr);
+        $dateFin = htmlentities($_GET['dateFin'] ?? end($dates)->datetr);
+
+
+        return $this->view('productOwner/tresorerieClient', [
+            'title' => 'Tresorerie',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes'
+            ],
+            'idClient' => $idClient,
+            'dateDebut' => $dateDebut,
+            'dateFin' => $dateFin,
+        ]);
+    }
 }

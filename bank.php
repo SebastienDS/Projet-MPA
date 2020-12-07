@@ -32,6 +32,7 @@ $router->get('/client/mesComptes', 'App\Controllers\ClientController@mesComptes'
 $router->get('/client/compte/:id', 'App\Controllers\CompteController@detail');
 $router->get('/client/mesImpayes', 'App\Controllers\ClientController@mesImpayes');
 $router->get('/client/compte/:id/transaction/:siren/:date', 'App\Controllers\CompteController@detailTransaction');
+$router->get('/client/tresorerie', 'App\Controllers\ClientController@tresorerie');
 
 
 $router->get('/admin', 'App\Controllers\AdminController@accueil');
@@ -52,7 +53,7 @@ $router->get('/productOwner/client/:id', 'App\Controllers\ProductOwnerController
 $router->get('/productOwner/client/:id/compte/:idCompte', 'App\Controllers\ProductOwnerController@compte');
 $router->get('/productOwner/client/:id/impayes', 'App\Controllers\ProductOwnerController@impayesClient');
 $router->get('/productOwner/client/:idClient/compte/:idCompte/transaction/:siren/:date', 'App\Controllers\ProductOwnerController@transactions');
-
+$router->get('/productOwner/client/:idClient/tresorerie', 'App\Controllers\ProductOwnerController@tresorerieClient');
 
 
 $router->post('/download/:format/compte/:id', 'App\Controllers\DownloadController@downloadCompte');

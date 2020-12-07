@@ -7,6 +7,9 @@
         <a href="<?= SCRIPT_NAME ?>/bank.php/productOwner/client/<?= $idClient ?>" class="headerBtn center-x center-y">
             Comptes
         </a>
+        <a href="<?= SCRIPT_NAME ?>/bank.php/productOwner/client/<?= $idClient ?>/tresorerie" class="headerBtn center-x center-y">
+            Trésorerie
+        </a>
         <a href="<?= SCRIPT_NAME ?>/bank.php/productOwner/client/<?= $idClient ?>/impayes" class="headerBtn center-x center-y">
             Impayés
         </a>
