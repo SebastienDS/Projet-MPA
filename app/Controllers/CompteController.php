@@ -9,7 +9,7 @@ use App\Models\Transaction;
 
 class CompteController extends Controller {
 
-    private static $rowPerPages = 10;
+    private static $rowPerPages = 7;
 
     public function detail(int $id) {
         $this->isConnected(['client']);

@@ -11,7 +11,7 @@ use App\Models\Transaction;
 
 class ProductOwnerController extends Controller {
 
-    private static $rowPerPages = 10;
+    private static $rowPerPages = 7;
 
 
     public function accueil() {
