@@ -20,7 +20,14 @@
 
 </div>
 
-<div class="footer-fixed flex-end center-y">
+<div class="footer-fixed space-between center-y">
+
+    <div class="DL-btns space-around">
+        <a href="<?= SCRIPT_NAME ?>/bank.php/client/president" class="btn">
+            Motifs impayés
+        </a>
+
+    </div>
 
     <div class="DL-btns space-around">
         <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">

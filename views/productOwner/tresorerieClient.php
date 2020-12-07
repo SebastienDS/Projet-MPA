@@ -28,13 +28,7 @@
     google.charts.load('current', {'packages': [ 'corechart' ] });
 
     google.charts.setOnLoadCallback(() => {
-        const data = new google.visualization.arrayToDataTable([
-            ['Années', 'Compte 1', 'Compte 2'],
-            ['2017',  1000,      400],
-            ['2018',  1170,      460],
-            ['2019',  660,       1120],
-            ['2020',  1030,      540]
-        ]);
+        const data = new google.visualization.arrayToDataTable(<?= json_encode($tresorerie) ?>);
 
         const options = {
             title: 'Soldes',

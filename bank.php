@@ -33,6 +33,7 @@ $router->get('/client/compte/:id', 'App\Controllers\CompteController@detail');
 $router->get('/client/mesImpayes', 'App\Controllers\ClientController@mesImpayes');
 $router->get('/client/compte/:id/transaction/:siren/:date', 'App\Controllers\CompteController@detailTransaction');
 $router->get('/client/tresorerie', 'App\Controllers\ClientController@tresorerie');
+$router->get('/client/president', 'App\Controllers\ClientController@president');
 
 
 $router->get('/admin', 'App\Controllers\AdminController@accueil');

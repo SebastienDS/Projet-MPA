@@ -77,6 +77,13 @@ class ClientController extends Controller {
         $dateDebut = htmlentities($_GET['dateDebut'] ?? $dates[0]->datetr);
         $dateFin = htmlentities($_GET['dateFin'] ?? end($dates)->datetr);
 
+        $tresorerie = [
+            ['Années', 'Compte 1', 'Compte 2'],
+            ['2017',  1000,      400],
+            ['2018',  1170,      460],
+            ['2019',  660,       1120],
+            ['2020',  1030,      540]
+        ];
 
         return $this->view('client/tresorerie', [
             'title' => 'Tresorerie',
@@ -88,6 +95,11 @@ class ClientController extends Controller {
             'idClient' => $_SESSION['id'],
             'dateDebut' => $dateDebut,
             'dateFin' => $dateFin,
+            'tresorerie' => $tresorerie
         ]);
+    }
+
+    public function president() {
+
     }
 }
