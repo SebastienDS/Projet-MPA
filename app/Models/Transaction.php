@@ -104,7 +104,7 @@ class Transaction extends Model {
         $stmt = DBConnection::getPDO()->prepare("SELECT N_SIREN as siren, Raison_Sociale as raisonSociale, 
             datetr as datetr, 'Euro', moyenPay, Mtrans as montant
             FROM {$table} NATURAL JOIN {$entrepriseTable} WHERE idCompte = :idCompte AND N_SIREN = :siren AND 
-            datetr = :datetr GROUP BY datetr, N_SIREN {$queryCondition} ORDER BY {$orderBy} {$orderdirection} {$queryLimit}");
+            datetr = :datetr {$queryCondition} ORDER BY {$orderBy} {$orderdirection} {$queryLimit}");
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute($where);
         return $stmt->fetchAll();
@@ -114,7 +114,7 @@ class Transaction extends Model {
         $table = static::getTable();
 
         $stmt = DBConnection::getPDO()->prepare("SELECT 1 FROM {$table} 
-            WHERE idCompte = ? AND N_SIREN = ? AND datetr = ? GROUP BY datetr, N_SIREN");
+            WHERE idCompte = ? AND N_SIREN = ? AND datetr = ?");
         $stmt->execute([$idCompte, $siren, $date]);
         return $stmt->rowCount();
     }
