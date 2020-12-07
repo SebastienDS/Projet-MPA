@@ -19,7 +19,7 @@ class ProductOwnerController extends Controller {
         $this->isConnected(['productOwner']);
 
 
-        if (isset($_GET['search']) && Profil::exist($_GET['search'])) {
+        if (isset($_GET['search']) && $_GET['search'] != '' && Profil::exist($_GET['search'])) {
             $comptes = [Profil::findById($_GET['search'], ['id', 'nom', 'prenom'])];
         } else {
             $comptes = Client::getColumns(['id', 'nom', 'prenom']);
