@@ -13,6 +13,7 @@ class ConnexionController extends Controller {
     public function connexion() {
         $this->redirectIfLogged();
         $error = (int)htmlentities($_GET['error'] ?? 0);
+        $attemptsRemaining = (int)htmlentities($_GET['errorConnexion'] ?? 100);
 
         return $this->view('connexion', [
             'title' => 'Connectez-vous',
@@ -21,7 +22,8 @@ class ConnexionController extends Controller {
                 'style',
                 'connexion'
             ],
-            'error' => $error
+            'error' => $error,
+            'attemptsRemaining' => $attemptsRemaining
         ]);
     }
 
@@ -32,8 +34,9 @@ class ConnexionController extends Controller {
 
         if (isset($_COOKIE['connected'])) {
             $_SESSION = explode(';', $_COOKIE['connected']);
+            $this->redirectIfLogged();
         }
-        if ((int)($_COOKIE['errorConnexion'] ?? 0) >= 3) {
+        if ($_COOKIE['errorConnexion'] && (int)$_COOKIE['errorConnexion'] <= 0) {
             return header('Location: '. SCRIPT_NAME . '/bank.php/connexion?error=2');
         }
 
@@ -63,18 +66,19 @@ class ConnexionController extends Controller {
         }
 
         if (!isset($_COOKIE['errorConnexion'])) {
-            $this->setCookie('errorConnexion', 3*60, [1]);
+            $attemptsRemaining = 3;
+            $this->setCookie('errorConnexion', 180, [$attemptsRemaining]);
         } else {
-            $errorConnexion = (int)$_COOKIE['errorConnexion'];
-            $errorConnexion++;
-            $this->setCookie('errorConnexion', 3*60, [$errorConnexion]);
+            $attemptsRemaining = (int)$_COOKIE['errorConnexion'];
+            $attemptsRemaining--;
+            $this->setCookie('errorConnexion', 180, [$attemptsRemaining]);
 
-            if ($errorConnexion >= 3) {
+            if ($attemptsRemaining <= 0) {
                 return header('Location: '. SCRIPT_NAME . '/bank.php/connexion?error=2');
+
             }
         }
-
-        return header('Location: '. SCRIPT_NAME .'/bank.php/connexion?error=1');
+        return header('Location: '. SCRIPT_NAME . "/bank.php/connexion?error=1&errorConnexion=$attemptsRemaining");
     }
 
     public function changePassword() {
