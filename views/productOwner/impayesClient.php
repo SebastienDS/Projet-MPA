@@ -31,6 +31,7 @@
     <div class="DL-btns space-around">
         <form action="<?= SCRIPT_NAME ?>/bank.php/download/pdf/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">
             <button class="btn">PDF</button>
+            <input type="hidden" id="imgStored" name="imgStored" style="display: none">
         </form>
         <form action="<?= SCRIPT_NAME ?>/bank.php/download/xls/impayes/client/<?= $idClient ?>?dateDebut=<?= $dateDebut ?>&dateFin=<?= $dateFin ?>" method="POST">
             <button class="btn">XLS</button>
@@ -44,7 +45,7 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    google.charts.load('current', {'packages': [ 'bar' ] });
+    google.charts.load('current', {'packages': [ 'corechart' ] });
 
     google.charts.setOnLoadCallback(() => {
         const data = new google.visualization.arrayToDataTable(<?= json_encode($impayes) ?>);
@@ -60,7 +61,14 @@
             }
         };
 
-        const chart = new google.charts.Bar(document.getElementById('graphique'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+        const chart = new google.visualization.ColumnChart(document.getElementById('graphique'));
+
+
+        google.visualization.events.addListener(chart, 'ready', () => {
+            document.querySelector('#imgStored').value = chart.getImageURI();
+        })
+
+
+        chart.draw(data, options);
     });
 </script>

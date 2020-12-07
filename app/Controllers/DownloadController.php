@@ -28,8 +28,8 @@ class DownloadController extends Controller {
 
         $params = [];
         if ($format === 'pdf') {
-            $client = Profil::findById($idClient, ['prenom', 'nom']);
-            $params[] = "Exportation Compte n°$idCompte de {$client->prenom} {$client->nom}";
+            $entreprise = Profil::getEntreprise($idClient);
+            $params[] = "Exportation Compte n°$idCompte de $entreprise";
         }
 
         $download = 'download'. strtoupper($format);
@@ -45,8 +45,10 @@ class DownloadController extends Controller {
 
         $params = [];
         if ($format === 'pdf') {
-            $client = Profil::findById($idClient, ['prenom', 'nom']);
-            $params[] = "Exportation des impayés de {$client->prenom} {$client->nom} entre le {$dateDebut} et le {$dateFin}";
+            $img = $_POST['imgStored'];
+            $entreprise = Profil::getEntreprise($idClient);
+            $params[] = "Exportation des impayés de $entreprise entre le $dateDebut et le $dateFin";
+            return $this->downloadImagePDF($img, ...$params);
         }
 
         $download = 'download'. strtoupper($format);
@@ -119,6 +121,15 @@ class DownloadController extends Controller {
         $pdf->WriteHTML("<h1 class='title'> $title </h1>");
         $pdf->WriteHTML("<p class='title'>". date("F j, Y, g:i a") ."<p/>");
         $pdf->WriteHTML($content);
+        $pdf->Output();
+    }
+
+    public function downloadImagePDF($img, string $title) {
+        $pdf = new Mpdf();
+        $pdf->WriteHTML(file_get_contents('public/css/download.css'), 1);
+        $pdf->WriteHTML("<h1 class='title'> $title </h1>");
+        $pdf->WriteHTML("<p class='title'>". date("F j, Y, g:i a") ."<p/>");
+        $pdf->WriteHTML("<img src='$img'>");
         $pdf->Output();
     }
 

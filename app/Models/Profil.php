@@ -65,4 +65,15 @@ class Profil extends Model {
         $stmt->execute([$id]);
         return $stmt->rowCount() > 0;
     }
+
+    public static function getEntreprise(int $idClient): string {
+        $table = static::getTable();
+        $entrepriseTable = Entreprise::getTable();
+
+        $stmt = DBConnection::getPDO()->prepare("SELECT Raison_Sociale as nom from {$table} JOIN {$entrepriseTable} ON numSiren = N_SIREN WHERE id = ?");
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute([$idClient]);
+        $profil = $stmt->fetch();
+        return $profil ? $profil->nom : '';
+    }
 }
