@@ -202,10 +202,6 @@ class ProductOwnerController extends Controller {
     public function tresorerieClient(int $idClient) {
         $this->isConnected(['productOwner']);
 
-        $dates = Transaction::getDates();
-        $dateDebut = htmlentities($_GET['dateDebut'] ?? $dates[0]->datetr);
-        $dateFin = htmlentities($_GET['dateFin'] ?? end($dates)->datetr);
-
         $tresorerie = [
             ['Années', 'Compte 1', 'Compte 2'],
             ['2017',  1000,      400],
@@ -222,8 +218,6 @@ class ProductOwnerController extends Controller {
                 'comptes'
             ],
             'idClient' => $idClient,
-            'dateDebut' => $dateDebut,
-            'dateFin' => $dateFin,
             'tresorerie' => $tresorerie
         ]);
     }

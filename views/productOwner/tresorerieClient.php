@@ -1,18 +1,7 @@
 <?php require_once('views/include/headerPOClientView.php') ?>
 
 <div class="bandeau center-x center-y">
-    <form class="space-around w-70">
-        <div class="center-y">
-            <label for="dateDebut">Date de début</label>
-            <input type="date" id="dateDebut" name="dateDebut" value="<?= $dateDebut ?>">
-        </div>
-        <div class="center-y">
-            <label for="dateFin">Date de fin</label>
-            <input type="date" id="dateFin" name="dateFin" value="<?= $dateFin ?>">
-        </div>
 
-        <button type="submit" class="btn">Graphique</button>
-    </form>
 </div>
 
 
