@@ -1,4 +1,4 @@
-<?php require_once('views/include/header.php') ?>
+<?php require_once('views/include/headerPOClientView.php') ?>
 
 <div class="bandeau center-x center-y">
     <form class="space-around w-70">
