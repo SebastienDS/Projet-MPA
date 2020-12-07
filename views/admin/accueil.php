@@ -36,7 +36,7 @@
     <div class="modal-content column space-around center-y">
         <p>
             Avez-vous l'accord du Product Owner ? <br>
-            (Cette action est définitif et irréversible)
+            (Cette action est définitive et irréversible)
         </p>
 
         <div class="space-around w-70">

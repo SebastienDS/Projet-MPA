@@ -33,6 +33,9 @@ class ConnexionController extends Controller {
         if (isset($_COOKIE['connected'])) {
             $_SESSION = explode(';', $_COOKIE['connected']);
         }
+        if ((int)($_COOKIE['errorConnexion'] ?? 0) >= 3) {
+            return header('Location: '. SCRIPT_NAME . '/bank.php/connexion?error=2');
+        }
 
         $_SESSION['username'] = $username;
 
@@ -58,6 +61,19 @@ class ConnexionController extends Controller {
             }
             return header('Location: '. SCRIPT_NAME .'/bank.php/productOwner');
         }
+
+        if (!isset($_COOKIE['errorConnexion'])) {
+            $this->setCookie('errorConnexion', 3*60, [1]);
+        } else {
+            $errorConnexion = (int)$_COOKIE['errorConnexion'];
+            $errorConnexion++;
+            $this->setCookie('errorConnexion', 3*60, [$errorConnexion]);
+
+            if ($errorConnexion >= 3) {
+                return header('Location: '. SCRIPT_NAME . '/bank.php/connexion?error=2');
+            }
+        }
+
         return header('Location: '. SCRIPT_NAME .'/bank.php/connexion?error=1');
     }
 

@@ -2,9 +2,13 @@
 
 <div class="form-connexion-container center-x center-y">
     <form class="connexion-form space-around column" method='POST' action="<?= SCRIPT_NAME ?>/bank.php/connexion/validation">
-        <?php if ($error === 1):?>
+        <?php if ($error === 1): ?>
             <div class="center-x center-y">
-                <h2 class="error-msg">Username or Password incorrect</h2>
+                <h2 class="error-msg">Identifiant ou Mot de passe incorrect</h2>
+            </div>
+        <?php elseif ($error === 2): ?>
+            <div class="center-x center-y">
+                <h2 class="error-msg">Vous devez attendre avant de pouvoir réessayer</h2>
             </div>
         <?php endif ?>
         <div class="center-x center-y">
