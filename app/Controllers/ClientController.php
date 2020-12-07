@@ -73,13 +73,16 @@ class ClientController extends Controller {
     public function tresorerie() {
         $this->isConnected(['client']);
 
-        $tresorerie = [
-            ['Années', 'Compte 1', 'Compte 2'],
-            ['2017',  1000,      400],
-            ['2018',  1170,      460],
-            ['2019',  660,       1120],
-            ['2020',  1030,      540]
-        ];
+        $montants = Transaction::getMontants($_SESSION['id']);
+        $solde = Compte::getSolde($_SESSION['id']);
+
+        $tresorerie = [];
+        foreach ($montants as $row) {
+            $solde -= $row->montant;
+            array_unshift($tresorerie, [$row->datetr, (int)$solde]);
+        }
+        array_unshift($tresorerie, ['Dates', Compte::getInfos($_SESSION['id'])[0]->nom]);
+
 
         return $this->view('client/tresorerie', [
             'title' => 'Tresorerie',
@@ -93,7 +96,24 @@ class ClientController extends Controller {
         ]);
     }
 
-    public function president() {
+    public function motifsImpayes() {
+        $this->isConnected(['client']);
 
+        $motifs = Transaction::getMotifsImpayes($_SESSION['id']);
+        foreach ($motifs as $key => $row) {
+            $motifs[$key][1] = (int)$row[1];
+        }
+        array_unshift($motifs, ['Motifs', 'Nombre']);
+
+        return $this->view('client/motifsImpayes', [
+            'title' => 'Motifs Impayés',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes'
+            ],
+            'idClient' => $_SESSION['id'],
+            'motifs' => $motifs
+        ]);
     }
 }

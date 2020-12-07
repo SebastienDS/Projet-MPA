@@ -47,4 +47,14 @@ class Compte extends Model {
         $stmt = DBConnection::getPDO()->prepare("DELETE FROM {$table} WHERE idcompte = ?");
         $stmt->execute([$idCompte]);
     }
+
+    public static function getSolde(int $idClient): int {
+        $table = static::getTable();
+
+        $stmt = DBConnection::getPDO()->prepare("SELECT solde FROM {$table} WHERE id = ?");
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute([$idClient]);
+        $data = $stmt->fetch();
+        return $data ? $data->solde : 0;
+    }
 }

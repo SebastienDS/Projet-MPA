@@ -127,4 +127,23 @@ class Transaction extends Model {
         $stmt->execute([$idClient]);
         return $stmt->fetchAll();
     }
+
+    public static function getMotifsImpayes(int $idClient): array {
+        $table = static::getTable();
+        $motifsImpayesTable = MotifsImpaye::getTable();
+        $compteTable = Compte::getTable();
+
+        $stmt = DBConnection::getPDO()->prepare("SELECT labelMotif as label, COUNT(idMotifImpaye) as count FROM {$table} JOIN {$motifsImpayesTable} ON idMotifImpaye = idMotif NATURAL JOIN {$compteTable} WHERE idMotifImpaye != 0 AND id = ? GROUP BY idMotifImpaye");
+        $stmt->setFetchMode(PDO::FETCH_NUM);
+        $stmt->execute([$idClient]);
+        return $stmt->fetchAll();
+    }
+
+    public static function getMontants(int $idClient) {
+        $table = static::getTable();
+        $stmt = DBConnection::getPDO()->prepare("select datetr, MTrans as montant from {$table} natural join Compte where id = ? order by datetr desc");
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute([$idClient]);
+        return $stmt->fetchAll();
+    }
 }

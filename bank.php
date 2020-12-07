@@ -31,9 +31,9 @@ $router->get('/client', 'App\Controllers\ClientController@accueil');
 $router->get('/client/mesComptes', 'App\Controllers\ClientController@mesComptes');
 $router->get('/client/compte/:id', 'App\Controllers\CompteController@detail');
 $router->get('/client/mesImpayes', 'App\Controllers\ClientController@mesImpayes');
+$router->get('/client/mesImpayes/motifs', 'App\Controllers\ClientController@motifsImpayes');
 $router->get('/client/compte/:id/transaction/:siren/:date', 'App\Controllers\CompteController@detailTransaction');
 $router->get('/client/tresorerie', 'App\Controllers\ClientController@tresorerie');
-$router->get('/client/president', 'App\Controllers\ClientController@president');
 
 
 $router->get('/admin', 'App\Controllers\AdminController@accueil');
@@ -50,9 +50,10 @@ $router->get('/admin/updateProfil/:idClient/deleteCompte/:idCompte', 'App\Contro
 
 $router->get('/productOwner', 'App\Controllers\ProductOwnerController@accueil');
 $router->get('/productOwner/impayes', 'App\Controllers\ProductOwnerController@impayes');
-$router->get('/productOwner/client/:id', 'App\Controllers\ProductOwnerController@client');
-$router->get('/productOwner/client/:id/compte/:idCompte', 'App\Controllers\ProductOwnerController@compte');
-$router->get('/productOwner/client/:id/impayes', 'App\Controllers\ProductOwnerController@impayesClient');
+$router->get('/productOwner/client/:idClient', 'App\Controllers\ProductOwnerController@client');
+$router->get('/productOwner/client/:idClient/impayes', 'App\Controllers\ProductOwnerController@impayesClient');
+$router->get('/productOwner/client/:idClient/impayes/motifs', 'App\Controllers\ProductOwnerController@motifsImpayes');
+$router->get('/productOwner/client/:idClient/compte/:idCompte', 'App\Controllers\ProductOwnerController@compte');
 $router->get('/productOwner/client/:idClient/compte/:idCompte/transaction/:siren/:date', 'App\Controllers\ProductOwnerController@transactions');
 $router->get('/productOwner/client/:idClient/tresorerie', 'App\Controllers\ProductOwnerController@tresorerieClient');
 

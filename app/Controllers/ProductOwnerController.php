@@ -203,13 +203,16 @@ class ProductOwnerController extends Controller {
     public function tresorerieClient(int $idClient) {
         $this->isConnected(['productOwner']);
 
-        $tresorerie = [
-            ['Années', 'Compte 1', 'Compte 2'],
-            ['2017',  1000,      400],
-            ['2018',  1170,      460],
-            ['2019',  660,       1120],
-            ['2020',  1030,      540]
-        ];
+        $montants = Transaction::getMontants($idClient);
+        $solde = Compte::getSolde($idClient);
+
+        $tresorerie = [];
+        foreach ($montants as $row) {
+            $solde -= $row->montant;
+            array_unshift($tresorerie, [$row->datetr, (int)$solde]);
+        }
+        array_unshift($tresorerie, ['Dates', Compte::getInfos($idClient)[0]->nom]);
+
 
         return $this->view('productOwner/tresorerieClient', [
             'title' => 'Tresorerie',
@@ -220,6 +223,27 @@ class ProductOwnerController extends Controller {
             ],
             'idClient' => $idClient,
             'tresorerie' => $tresorerie
+        ]);
+    }
+
+    public function motifsImpayes(int $idClient) {
+        $this->isConnected(['productOwner']);
+
+        $motifs = Transaction::getMotifsImpayes($idClient);
+        foreach ($motifs as $key => $row) {
+            $motifs[$key][1] = (int)$row[1];
+        }
+        array_unshift($motifs, ['Motifs', 'Nombre']);
+
+        return $this->view('productOwner/motifsImpayesClient', [
+            'title' => 'Motifs Impayés',
+            'style' => [
+                'accueil',
+                'style',
+                'comptes'
+            ],
+            'idClient' => $idClient,
+            'motifs' => $motifs
         ]);
     }
 }

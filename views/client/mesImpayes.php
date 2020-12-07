@@ -23,7 +23,7 @@
 <div class="footer-fixed space-between center-y">
 
     <div class="DL-btns space-around">
-        <a href="<?= SCRIPT_NAME ?>/bank.php/client/president" class="btn">
+        <a href="<?= SCRIPT_NAME ?>/bank.php/client/mesImpayes/motifs" class="btn">
             Motifs impayés
         </a>
 
