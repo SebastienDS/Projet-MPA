@@ -52,7 +52,7 @@ $_GET['idClient'] = $_SESSION['id'];
         </th>
     </tr>
     <?php foreach ($transactions as $transaction): ?>
-        <tr class="clickableRow <?= $transaction->montantTotal >= 0 ? 'montantPositif' : 'montantNegatif' ?>" siren="<?= $transaction->siren ?>" date="<?= $transaction->date ?>">
+        <tr class="<?= $transaction->nombreTransactions > 1 ? 'clickableRow' : '' ?> <?= $transaction->montantTotal >= 0 ? 'montantPositif' : 'montantNegatif' ?>" siren="<?= $transaction->siren ?>" date="<?= $transaction->date ?>">
             <td><?= $transaction->siren ?></td>
             <td><?= $transaction->raisonSociale ?></td>
             <td><?= $transaction->date ?></td>
@@ -67,6 +67,7 @@ $_GET['idClient'] = $_SESSION['id'];
 
 
 
+<div>
 <div class="footer-fixed space-between center-y">
     <div class="total">
         <?= $compteInfos->solde ?>
