@@ -66,7 +66,7 @@ class DownloadController extends Controller {
         if (!isset($_GET['sortDirection'])) { $_GET['sortDirection'] = 'DESC'; }
 
         $transactions = Transaction::getTransactions($idCompte, $siren, $date, $_GET['colSorted'], $_GET['sortDirection'], $where);
-        array_unshift($transactions, ['Numéro de SIREN', 'Raison Sociale', 'Date traitement', 'Devise', 'Moyen de paiement', 'Montant']);
+        array_unshift($transactions, ['ID Transaction', 'Numéro de SIREN', 'Raison Sociale', 'Date traitement', 'Devise', 'Moyen de paiement', 'Montant']);
 
         $params = [];
         if ($format === 'pdf') {

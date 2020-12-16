@@ -10,6 +10,7 @@ $_GET['idClient'] = $_SESSION['id'];
     <form>
         <select name="searchingBy">
             <option value=""> Rechercher par </option>
+            <option value="idtrans">ID Transaction</option>
             <option value="N_SIREN">Numero de SIREN</option>
             <option value="Raison_Sociale">Raison sociale</option>
             <option value="datetr">Date de traitement</option>
@@ -25,6 +26,9 @@ $_GET['idClient'] = $_SESSION['id'];
 
 <table class="caracteristiques">
     <tr>
+        <th>
+            <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $date ?>/?colSorted=idtrans&sortDirection=<?= ($colSorted !== 'idtrans') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>">ID Transaction </a>
+        </th>
         <th>
             <a href="<?= SCRIPT_NAME ?>/bank.php/client/compte/<?= $numeroCompte ?>/transaction/<?= $siren ?>/<?= $date ?>/?colSorted=N_SIREN&sortDirection=<?= ($colSorted !== 'N_SIREN') ? 'ASC' : (($sortDirection === 'ASC') ? 'DESC' : 'ASC') ?>&<?= $otherParams ?>"> Numéro de SIREN </a>
         </th>
@@ -49,6 +53,7 @@ $_GET['idClient'] = $_SESSION['id'];
     </tr>
     <?php foreach ($transactions as $transaction): ?>
         <tr class="<?= $transaction->montant >= 0 ? 'montantPositif' : 'montantNegatif' ?>" siren="<?= $transaction->siren ?>" date="<?= $transaction->datetr ?>">
+            <td><?= $transaction->idtrans ?></td>
             <td><?= $transaction->siren ?></td>
             <td><?= $transaction->raisonSociale ?></td>
             <td><?= $transaction->datetr ?></td>

@@ -101,7 +101,7 @@ class Transaction extends Model {
         $where['siren'] = $siren;
         $where['datetr'] = $date;
 
-        $stmt = DBConnection::getPDO()->prepare("SELECT N_SIREN as siren, Raison_Sociale as raisonSociale, 
+        $stmt = DBConnection::getPDO()->prepare("SELECT idtrans, N_SIREN as siren, Raison_Sociale as raisonSociale, 
             datetr as datetr, 'Euro', moyenPay, Mtrans as montant
             FROM {$table} NATURAL JOIN {$entrepriseTable} WHERE idCompte = :idCompte AND N_SIREN = :siren AND 
             datetr = :datetr {$queryCondition} ORDER BY {$orderBy} {$orderdirection} {$queryLimit}");
